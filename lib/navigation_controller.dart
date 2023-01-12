@@ -1,6 +1,5 @@
-
+import 'package:crunchyanime/bookmark/screen/bookmark_screen.dart';
 import 'package:crunchyanime/home/home_screen.dart';
-import 'package:crunchyanime/profile/profile_screen.dart';
 import 'package:crunchyanime/search/search_screen.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +15,6 @@ class _NavigationControllerState extends State<NavigationController> {
 
   int _page = 0;
 
-
-
   void onTabTapped(int index) {
     setState(() {
       _page = index;
@@ -31,7 +28,7 @@ class _NavigationControllerState extends State<NavigationController> {
     final List<Widget> widgetsChildren = [
       const HomeScreen(),
       const SearchScreen(),
-      const ProfileScreen(),
+      const BookmarkScreen(),
     ];
 
     return Scaffold(
