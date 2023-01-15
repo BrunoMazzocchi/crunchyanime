@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'coming_card.dart';
@@ -38,7 +39,9 @@ class ComingList extends StatelessWidget {
                   maxLines: 2,
                 ),
                 onTap: () {
-                  print("See All");
+                  if (kDebugMode) {
+                    print("See All");
+                  }
                 },
               )
             ],

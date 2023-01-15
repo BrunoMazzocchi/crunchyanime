@@ -1,4 +1,5 @@
 import 'package:crunchyanime/home/widget/watching_card.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class WatchingList extends StatelessWidget {
@@ -34,7 +35,9 @@ class WatchingList extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                print("See All");
+                if (kDebugMode) {
+                  print("See All");
+                }
               },
             )
           ],

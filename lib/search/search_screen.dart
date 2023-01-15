@@ -1,4 +1,4 @@
-import 'dart:ui';
+
 
 import 'package:crunchyanime/bookmark/widget/favorite_list.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,14 +20,18 @@ class _SearchScreenState extends State<SearchScreen> {
   final FocusNode _focus = FocusNode();
   late var iconSize = 20.0;
   late var searchSize = 0.0;
-  late var body = noSearch;
 
+   bool notSearching = true;
+   bool isTapped = false;
+   late Widget body;
   @override
   void initState() {
-    body = noSearch;
+     body = notSearch();
+
     _focus.addListener(_onFocusChange);
     super.initState();
   }
+
 
   @override
   void dispose() {
@@ -43,7 +47,10 @@ class _SearchScreenState extends State<SearchScreen> {
         width = 300;
         iconSize = 0;
         searchSize = 20;
-        body = onTapped;
+        isTapped = true;
+        notSearching = false;
+
+        body = onTapped();
       });
     } else if (!_focus.hasFocus) {
       setState(() {
@@ -51,168 +58,192 @@ class _SearchScreenState extends State<SearchScreen> {
         iconSize = 20;
         width = 350;
         color = color1;
-        body = noSearch;
+        notSearching = true;
+        isTapped = false;
+
+        body = notSearch();
       });
     }
   }
 
 
-
-  Widget noSearch = Column(
-    children: [
-      AnimatedContainer(
-        margin: const EdgeInsets.only(top: 20),
+  Widget onTapped() {
+    return AnimatedOpacity(
+      opacity: isTapped ? 1.0 : 0.0,
+      duration: const Duration(milliseconds: 500),
+      child: AnimatedContainer(
         duration: const Duration(milliseconds: 1000),
-        width: 450,
-        height: 200,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: const [
-            Text(
-              'What are you looking for?',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 40,
-                fontWeight: FontWeight.w400,
-                fontFamily: 'SF Pro',
-                wordSpacing: 2,
+        margin: const EdgeInsets.only(top: 20, bottom: 10),
+        width: 400,
+        height: 450,
+        child: ListView(
+          scrollDirection: Axis.vertical,
+          children: [
+            Container(
+              margin: const EdgeInsets.only(bottom: 10),
+              width: 350,
+              height: 120,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: Colors.white, width: 0.2),
               ),
-              textAlign: TextAlign.center,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image: const DecorationImage(
+                        image: AssetImage('assets/images/onepiecewano.jpg'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        'One Piece',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'SF Pro'),
+                      ),
+                      SizedBox(
+                        width: 200,
+                        child: Text(
+                          'The series focuses on Monkey D. Luffy, a young man made of rubber, who, inspired by his childhood idol, the powerful pirate Red-Haired Shanks, sets off on a journey from the East Blue Sea to find the mythical treasure, the One Piece, and proclaim himself the King of the Pirates. In an effort to organize his own crew, the Straw Hat Pirates,[Jp 1] Luffy rescues and befriends a pirate hunter and swordsman named Roronoa Zoro, and they head off in search of the titular treasure.',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: 'SF Pro',
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          maxLines: 3,
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
             ),
-            Text(
-              'Find your favorite anime, over more Than 10,000 anime',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 15,
-                fontFamily: 'SF Pro',
-                fontWeight: FontWeight.w300,
+            Container(
+              width: 350,
+              height: 120,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: Colors.white, width: 0.2),
               ),
-              textAlign: TextAlign.center,
-            )
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image: const DecorationImage(
+                        image: AssetImage('assets/images/onepiecewano.jpg'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        'One Piece',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'SF Pro'),
+                      ),
+                      SizedBox(
+                        width: 200,
+                        child: Text(
+                          'The series focuses on Monkey D. Luffy, a young man made of rubber, who, inspired by his childhood idol, the powerful pirate Red-Haired Shanks, sets off on a journey from the East Blue Sea to find the mythical treasure, the One Piece, and proclaim himself the King of the Pirates. In an effort to organize his own crew, the Straw Hat Pirates,[Jp 1] Luffy rescues and befriends a pirate hunter and swordsman named Roronoa Zoro, and they head off in search of the titular treasure.',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: 'SF Pro',
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          maxLines: 3,
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ),
           ],
         ),
       ),
-      const FavoriteList(),
-    ],
-  );
+    );
+  }
+  Widget notSearch() {
+    return AnimatedOpacity(
+        opacity: notSearching ? 1.0 : 0.0,
+        duration: const Duration(milliseconds: 500),
+        child: Column(
+          children: [
+            AnimatedContainer(
+              margin: const EdgeInsets.only(top: 20),
+              duration: const Duration(milliseconds: 1000),
+              width: 450,
+              height: 200,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: const [
+                  Text(
+                    'What are you looking for?',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 40,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: 'SF Pro',
+                      wordSpacing: 2,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    'Find your favorite anime, over more Than 10,000 anime',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontFamily: 'SF Pro',
+                      fontWeight: FontWeight.w300,
+                    ),
+                    textAlign: TextAlign.center,
+                  )
+                ],
+              ),
+            ),
+            const FavoriteList(),
+          ],
+        ),
+      );
+  }
 
-  Widget onTapped =  AnimatedContainer(
-    duration: const Duration(milliseconds: 1000),
-    margin: const EdgeInsets.only(top: 20, bottom: 10),
-    width: 400,
-    height: 450,
-    child:
-        ListView(
-        scrollDirection: Axis.vertical,
-        children: [
-          Container(
-            margin: const EdgeInsets.only(bottom: 10),
-            width: 350,
-            height: 120,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.white, width: 0.2),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Container(
-                  width: 100,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    image: const DecorationImage(
-                      image: AssetImage('assets/images/onepiecewano.jpg'),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
-                      'One Piece',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'SF Pro'),
-                    ),
-                    SizedBox(
-                      width: 200,
-                      child: Text(
-                        'The series focuses on Monkey D. Luffy, a young man made of rubber, who, inspired by his childhood idol, the powerful pirate Red-Haired Shanks, sets off on a journey from the East Blue Sea to find the mythical treasure, the One Piece, and proclaim himself the King of the Pirates. In an effort to organize his own crew, the Straw Hat Pirates,[Jp 1] Luffy rescues and befriends a pirate hunter and swordsman named Roronoa Zoro, and they head off in search of the titular treasure.',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: 'SF Pro',
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        maxLines: 3,
-                      ),
-                    )
-                  ],
-                )
-              ],
-            ),
-          ),
-          Container(
-            width: 350,
-            height: 120,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.white, width: 0.2),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Container(
-                  width: 100,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    image: const DecorationImage(
-                      image: AssetImage('assets/images/onepiecewano.jpg'),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
-                      'One Piece',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'SF Pro'),
-                    ),
-                    SizedBox(
-                      width: 200,
-                      child: Text(
-                        'The series focuses on Monkey D. Luffy, a young man made of rubber, who, inspired by his childhood idol, the powerful pirate Red-Haired Shanks, sets off on a journey from the East Blue Sea to find the mythical treasure, the One Piece, and proclaim himself the King of the Pirates. In an effort to organize his own crew, the Straw Hat Pirates,[Jp 1] Luffy rescues and befriends a pirate hunter and swordsman named Roronoa Zoro, and they head off in search of the titular treasure.',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: 'SF Pro',
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        maxLines: 3,
-                      ),
-                    )
-                  ],
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
-  );
+
+  void onSearching() {
+    if(_controller.text.isNotEmpty){
+      setState(() {
+        notSearching = false;
+        isTapped = false;
+        body = notSearch();
+      });
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -288,7 +319,6 @@ class _SearchScreenState extends State<SearchScreen> {
                   ],
                 ),
                 body,
-
               ],
             ),
           ),

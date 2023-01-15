@@ -1,5 +1,5 @@
 import 'package:crunchyanime/bookmark/widget/favorite_card.dart';
-import 'package:crunchyanime/home/widget/watching_card.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class FavoriteList extends StatelessWidget {
@@ -35,7 +35,9 @@ class FavoriteList extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                print("See All");
+                if (kDebugMode) {
+                  print("See All");
+                }
               },
             )
           ],

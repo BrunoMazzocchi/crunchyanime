@@ -38,6 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   curved_navigation_bar: ^1.0.3
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -73,7 +74,11 @@ flutter:
     - assets/images/myhero.png
     - assets/images/nier.png
     - assets/images/vinland.png
-
+    - assets/bg/onepiecebg.jpg
+    - assets/bg/luffy.jpg
+    - assets/bg/nami.jpg
+    - assets/bg/zoro.jpg
+    - assets/bg/nico.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

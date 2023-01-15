@@ -2,6 +2,8 @@ import 'package:crunchyanime/navigation_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'anime/open_anime_screen.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -30,6 +32,9 @@ class MyApp extends StatelessWidget {
       title: 'CrunchyApp',
       theme: ThemeData(),
       home: const NavigationController(),
+      routes: {
+        '/anime': (context) => const OpenAnimeScreen(),
+      },
     );
   }
 }
