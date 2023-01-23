@@ -37,6 +37,11 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   curved_navigation_bar: ^1.0.3
+  http: ^0.13.5
+  dio: ^4.0.6
+  shimmer: ^2.0.0
+  generic_bloc_provider: ^2.1.1
+  provider: ^6.0.5
 
 
 dev_dependencies:

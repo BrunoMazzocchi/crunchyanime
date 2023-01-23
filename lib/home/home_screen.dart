@@ -1,7 +1,6 @@
-import 'package:crunchyanime/home/widget/coming_list.dart';
-import 'package:crunchyanime/home/widget/trending_list.dart';
-import 'package:crunchyanime/home/widget/watching_list.dart';
+import 'package:crunchyanime/home/widget/anime_list.dart';
 import 'package:flutter/material.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -62,12 +61,23 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
 
+
+
     autoMoveGif(_gif);
 
     return Container(
       width: double.infinity,
       height: double.infinity,
-      color: Colors.black,
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Color.fromRGBO(33, 31, 43, 1),
+            Color.fromRGBO(10, 22, 37, 1)
+          ],
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+        ),
+      ),
       child: ListView(
         padding: const EdgeInsets.all(0),
         scrollDirection: Axis.vertical,
@@ -123,13 +133,15 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
+          const  AnimeList(title: 'Trending 🔥', type: 'trending',),
+          const  AnimeList(title: 'Shounen 👦', type: 'shounen',),
+          const  AnimeList(title: 'Super Power 🎆', type: 'super power',),
+          const  AnimeList(title: 'Adventure 🏰', type: 'adventure',),
+          const  AnimeList(title: 'Fantasy 🐉', type: 'fantasy',),
+          const  AnimeList(title: 'Magic 🪄', type: 'magic',),
+          const  AnimeList(title: 'Time Travel ⌛', type: 'time travel',),
+          const  AnimeList(title: 'Comedy 😶‍🌫️', type: 'comedy',),
 
-          //Continue watching
-          const WatchingList(),
-          //Coming
-          const ComingList(),
-          //Trending
-          const TrendingList(),
           const SizedBox(
             height: 100,
           ),

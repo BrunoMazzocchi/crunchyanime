@@ -19,7 +19,7 @@ class FavoriteList extends StatelessWidget {
               "Your Favorites",
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 25,
+                fontSize: 20,
                 fontWeight: FontWeight.normal,
                 fontFamily: 'SF Pro Display',
               ),

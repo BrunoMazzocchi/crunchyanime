@@ -1,51 +1,56 @@
 import 'package:flutter/material.dart';
 
-class WatchingCard extends StatefulWidget {
-  final String assetImage;
-  final String title;
-  final String status;
-  const WatchingCard({Key? key, required this.assetImage, required this.title, required this.status}) : super(key: key);
+import '../../anime/domain/models/anime_data.dart';
+
+class AnimeCard extends StatefulWidget {
+  final AnimeData data;
+
+  const AnimeCard({Key? key, required this.data, }) : super(key: key);
 
   @override
-  State<WatchingCard> createState() => _WatchingCardState();
+  State<AnimeCard> createState() => _AnimeCardState();
 }
 
-class _WatchingCardState extends State<WatchingCard> {
+class _AnimeCardState extends State<AnimeCard> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, '/anime');
+        Navigator.pushNamed(context, '/open_anime_screen',
+            arguments: widget.data);
       },
       child: Container(
         margin: const EdgeInsets.only(right: 10),
-        width: 150,
+        width: 120,
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
         child: Stack(
           children: [
             Container(
-              width: 150,
-              height: 145,
+              width: 120,
+              height: 150,
               decoration:  BoxDecoration(
-                color: Colors.black,
+                color: const Color.fromRGBO(33, 31, 43, 1),
                 image: DecorationImage(
-                  image: AssetImage(
-                      widget.assetImage),
+                  image: NetworkImage("${widget.data.attributes?.posterImage?.original}"),
                   fit: BoxFit.cover,
                 ),
                 borderRadius:
-                const BorderRadius.all(Radius.circular(10)),
+                const  BorderRadius.only(
+              topLeft: Radius.circular(10),
+          topRight: Radius.circular(10),
+        ),
               ),
             ),
             Positioned(
               bottom: 0,
               child: Container(
-                width: 150,
-                height: 50,
+                padding: const EdgeInsets.all(5),
+                width: 120,
+                height: 70,
                 decoration: const BoxDecoration(
-                  color: Colors.black,
+                  color: Color.fromRGBO(33, 31, 43, 1),
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(10),
                     bottomRight: Radius.circular(10),
@@ -54,24 +59,22 @@ class _WatchingCardState extends State<WatchingCard> {
                 child: Center(
                   child: Column(
                     mainAxisAlignment:
-                    MainAxisAlignment.spaceBetween,
+                    MainAxisAlignment.spaceAround,
                     children: [
-                      Container(
-                        width: 150,
-                        height: 2,
-                        color: Colors.orange,
-                      ),
-                      Text(
-                        widget.title,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                          fontWeight: FontWeight.normal,
-                          fontFamily: 'SF Pro Display',
+                      SizedBox(
+                        width: 100,
+                        child: Text(
+                          "${widget.data.attributes?.canonicalTitle}",
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
                         ),
                       ),
                       Text(
-                        widget.status,
+                        "${widget.data.attributes?.status?.toUpperCase()}",
                         style: const TextStyle(
                           color: Colors.grey,
                           fontSize: 12,
