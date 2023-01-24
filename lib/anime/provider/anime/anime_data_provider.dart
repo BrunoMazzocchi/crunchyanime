@@ -6,20 +6,23 @@ import '../../domain/models/categories_data.dart';
 class AnimeDataProvider {
 
   final Dio _dio = Dio();
-  late String _baseUrl = 'https://kitsu.io/api/edge/anime/';
 
   Future<AnimeData> getAnime(String animeId) async {
     late AnimeData data;
-
     try {
-      Response response = await _dio.get(_baseUrl + animeId);
+      Response response = await _dio.get("https://kitsu.io/api/edge/anime/$animeId");
       if (response.statusCode == 200) {
         data = AnimeData.fromJson(response.data['data']);
+      } else if(
+        response.statusCode == 404
+      ) {
+        throw Exception('Anime not found');
       } else {
-        throw Exception('Failed to load anime');
+        throw Exception('Something went wrong');
       }
+
     } catch (e) {
-      throw Exception('Failed to load anime');
+      throw Exception('Failed to load anime exception: $e');
     }
 
     return data;
@@ -29,7 +32,7 @@ class AnimeDataProvider {
     late Relationships relationships;
 
     try {
-      Response response = await _dio.get(_baseUrl + animeId);
+      Response response = await _dio.get("https://kitsu.io/api/edge/anime/$animeId");
       if (response.statusCode == 200) {
         relationships = Relationships.fromJson(response.data
         ['data']['relationships']);
@@ -45,9 +48,8 @@ class AnimeDataProvider {
 
   Future<CategoriesData> getCategories(String id) async {
     late CategoriesData categoriesData;
-    _baseUrl = 'https://kitsu.io/api/edge/anime/$id/genres';
     try {
-      Response response = await _dio.get(_baseUrl);
+      Response response = await _dio.get("https://kitsu.io/api/edge/anime/$id/genres");
       if (response.statusCode == 200) {
         categoriesData = CategoriesData.fromJson(response.data);
       } else {
