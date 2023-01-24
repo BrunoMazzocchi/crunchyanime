@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../database/database.dart';
+
 class BookmarkBanner extends StatefulWidget {
   const BookmarkBanner({Key? key}) : super(key: key);
 
@@ -8,6 +10,24 @@ class BookmarkBanner extends StatefulWidget {
 }
 
 class _BookmarkBannerState extends State<BookmarkBanner> {
+
+  int bookmarkCount = 0;
+
+  void viewBookmarks() async {
+    var db = await DB.instance.database;
+    var res = await db?.query('favourite');
+    setState(() {
+      bookmarkCount = res!.length;
+    });
+  }
+
+  @override
+  initState() {
+    super.initState();
+    viewBookmarks();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return  Container(
@@ -66,30 +86,10 @@ class _BookmarkBannerState extends State<BookmarkBanner> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Column(
-                        children: const [
-                          Text("Completed",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.normal,
-                              fontFamily: "SF Pro Display",
 
-                            ),
-                          ),
-                          Text("2",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                              fontWeight: FontWeight.normal,
-                              fontFamily: "SF Pro Display",
-                            ),
-                          ),
-                        ],
-                      ),
                       Column(
-                        children: const [
-                          Text("Bookmarked",
+                        children:  [
+                          const  Text("Bookmarked anime",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
@@ -97,8 +97,8 @@ class _BookmarkBannerState extends State<BookmarkBanner> {
                               fontFamily: "SF Pro Display",
                             ),
                           ),
-                          Text("24",
-                            style: TextStyle(
+                          Text("$bookmarkCount",
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 15,
                               fontWeight: FontWeight.normal,
