@@ -20,7 +20,7 @@ class _InteractiveDataState extends State<InteractiveData> {
   late Widget staff = StaffWidget(id: "${widget.data.id}");
   @override
   void initState() {
-    overview = Overview( id: "${widget.data.id}",);
+    overview = Overview( id: "${widget.data.id}", videoId: '${widget.data.attributes?.youtubeVideoId}',);
     super.initState();
   }
 

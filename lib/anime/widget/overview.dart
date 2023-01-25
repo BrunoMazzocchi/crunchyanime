@@ -2,6 +2,7 @@
 import 'package:crunchyanime/anime/widget/character_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../domain/bloc/anime_bloc.dart';
 import '../domain/bloc/character_bloc.dart';
@@ -10,7 +11,8 @@ import '../domain/models/character_data.dart';
 
 class Overview extends StatefulWidget {
   final String id;
-  const Overview({Key? key, required this.id}) : super(key: key);
+  final String videoId;
+  const Overview({Key? key, required this.id, required this.videoId}) : super(key: key);
 
   @override
   State<Overview> createState() => _OverviewState();
@@ -21,10 +23,28 @@ class _OverviewState extends State<Overview> {
   late AnimeBloc  animeBloc = Provider.of(context, listen: false);
   late Future<CharacterData>  data;
   late Future<CategoriesData> categoriesData;
+  late YoutubePlayerController _controller;
+
+
+
+
+
   @override
   void initState() {
     data = characterBloc.getCharacters(widget.id);
     categoriesData = animeBloc.getCategories(widget.id);
+    _controller = YoutubePlayerController(
+      initialVideoId: widget.videoId,
+      flags: const YoutubePlayerFlags(
+        mute: false,
+        autoPlay: false,
+        disableDragSeek: false,
+        loop: false,
+        isLive: false,
+        forceHD: true,
+        enableCaption: true,
+      ),
+    );
     super.initState();
   }
 
@@ -42,7 +62,6 @@ class _OverviewState extends State<Overview> {
                 future: categoriesData,
                 builder: (context, snapshot) {
                   if(snapshot.hasData) {
-
                     if(snapshot.data?.meta?.count==0) {
 
                       return const Center(
@@ -168,8 +187,8 @@ class _OverviewState extends State<Overview> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                  Padding(
+              children:  [
+                 const Padding(
                   padding:  EdgeInsets.only(top: 15, bottom: 15),
                   child:     Text(
                     "Trailer",
@@ -182,20 +201,21 @@ class _OverviewState extends State<Overview> {
                   ),
                 ),
                 Padding(
-                    padding:  EdgeInsets.only(bottom: 30),
+                    padding: const EdgeInsets.only(bottom: 30),
                     child: SizedBox(
                       width: double.infinity,
                       height: 200,
-                      child: Center(
-                        child: Text(
-                          "No trailer available at the moment",
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 15,
-                            fontWeight: FontWeight.normal,
-                            fontFamily: 'SF Pro Display',
-                          ),
+                      child: YoutubePlayerBuilder(
+                        player: YoutubePlayer(
+                          controller: _controller,
                         ),
+                        builder: (context, player) {
+                          return Column(
+                            children: [
+                              player,
+                            ],
+                          );
+                        },
                       ),
                     )
                 ),

@@ -43,6 +43,7 @@ dependencies:
   generic_bloc_provider: ^2.1.1
   provider: ^6.0.5
   sqflite: ^2.2.3
+  youtube_player_flutter: ^8.1.2
 
 
 
