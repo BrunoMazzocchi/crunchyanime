@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 
+import '../../domain/models/anime_container.dart';
 import '../../domain/models/anime_data.dart';
 import '../../domain/models/categories_data.dart';
 
@@ -61,4 +62,22 @@ class AnimeDataProvider {
 
     return categoriesData;
   }
+
+  Future<AnimeContainer> getAllAnime(String category, int page)  async {
+    late AnimeContainer animeContainer;
+    try {
+      Response response = await _dio.get("https://kitsu.io/api/edge/anime?filter[categories]=$category&page[limit]=20&page[offset]=$page");
+
+      if (response.statusCode == 200) {
+        animeContainer = AnimeContainer.fromJson(response.data);
+      } else {
+        throw Exception('Failed to load anime');
+      }
+    } catch (e) {
+      throw Exception('Failed to load anime');
+    }
+
+    return animeContainer;
+  }
+
 }

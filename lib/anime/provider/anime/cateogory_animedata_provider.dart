@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 
+import '../../domain/models/anime_container.dart';
 import '../../domain/models/anime_data.dart';
 
 class CategoryAnimeDataProvider{
@@ -25,6 +26,7 @@ class CategoryAnimeDataProvider{
 
     return data;
   }
+
 
   Future<List<AnimeData>> getByCategory(String category) async {
     String baseUrl = 'https://kitsu.io/api/edge/anime?filter[categories]=$category';

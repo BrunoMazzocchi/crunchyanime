@@ -1,5 +1,6 @@
 import 'package:crunchyanime/anime/provider/anime/anime_data_provider.dart';
 
+import '../../models/anime_container.dart';
 import '../../models/anime_data.dart';
 import '../../models/categories_data.dart';
 
@@ -17,5 +18,13 @@ class AnimeDataRepository {
   Future<CategoriesData> getCategories(String id) async {
     return await _animeDataProvider.getCategories(id);
   }
+
+  Future<AnimeContainer> getAllAnime(String type, int page) async {
+    return await _animeDataProvider.getAllAnime(type, page);
+  }
+
+
+
+
 
 }

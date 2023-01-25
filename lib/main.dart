@@ -2,6 +2,7 @@ import 'package:crunchyanime/anime/all_characters.dart';
 import 'package:crunchyanime/anime/domain/bloc/anime_bloc.dart';
 import 'package:crunchyanime/anime/domain/bloc/staff_bloc.dart';
 import 'package:crunchyanime/anime/domain/models/anime_data.dart';
+import 'package:crunchyanime/home/all_anime.dart';
 import 'package:crunchyanime/navigation_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -67,6 +68,9 @@ class MyApp extends StatelessWidget {
         ),
         '/staff': (context) =>  AllStaff(
           id: ModalRoute.of(context)!.settings.arguments as String,
+        ),
+        '/all_anime': (context) =>  AllAnime(
+          type: ModalRoute.of(context)!.settings.arguments as String,
         ),
       },
     ));

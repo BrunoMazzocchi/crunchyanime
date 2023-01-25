@@ -43,6 +43,20 @@ class _AnimeListState extends State<AnimeList> {
                 fontFamily: 'SF Pro Display',
               ),
             ),
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, '/all_anime', arguments: widget.type);
+                },
+                child:   Text(
+                  'See All ${widget.type}',
+                  style: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 14,
+                    fontWeight: FontWeight.normal,
+                    fontFamily: 'SF Pro Display',
+                  ),
+                ),
+              ),
           ],
         ),
       ),

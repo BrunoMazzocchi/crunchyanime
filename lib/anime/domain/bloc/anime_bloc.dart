@@ -6,6 +6,7 @@
 import 'package:crunchyanime/anime/domain/models/anime_data.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 
+import '../models/anime_container.dart';
 import '../models/categories_data.dart';
 import '../repository/anime/anime_data_repository.dart';
 import '../repository/anime/category_animedata_repository.dart';
@@ -47,6 +48,16 @@ class AnimeBloc implements Bloc {
   Future<CategoriesData> getCategories(String id) async {
     return await _animeDataRepository.getCategories(id);
   }
+
+
+
+  Future<AnimeContainer> getAllAnime(String type, int page) async {
+    return await _animeDataRepository.getAllAnime(type, page);
+  }
+
+
+
+
 
 
 
