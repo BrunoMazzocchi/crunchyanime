@@ -105,13 +105,18 @@ class _RankingDataState extends State<RankingData> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          "${widget.data.attributes?.canonicalTitle}",
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontFamily: 'SF Pro Display',
-                              fontWeight: FontWeight.normal),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width - 250,
+                          child: Text(
+                            "${widget.data.attributes?.canonicalTitle}",
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontFamily: 'SF Pro Display',
+                                fontWeight: FontWeight.normal),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
                         ),
                         IconButton(
                           onPressed: () {

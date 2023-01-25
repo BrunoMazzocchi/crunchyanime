@@ -1,5 +1,4 @@
-import 'package:crunchyanime/anime/provider/anime/anime_data_provider.dart';
-import 'package:crunchyanime/anime/provider/character/character_data_provider.dart';
+
 import 'package:crunchyanime/anime/widget/character_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

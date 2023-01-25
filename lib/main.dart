@@ -1,13 +1,16 @@
 import 'package:crunchyanime/anime/all_characters.dart';
 import 'package:crunchyanime/anime/domain/bloc/anime_bloc.dart';
+import 'package:crunchyanime/anime/domain/bloc/staff_bloc.dart';
 import 'package:crunchyanime/anime/domain/models/anime_data.dart';
 import 'package:crunchyanime/navigation_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import 'anime/all_staff.dart';
 import 'anime/domain/bloc/character_bloc.dart';
 import 'anime/open_anime_screen.dart';
+import 'anime/provider/staff/staff_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -46,6 +49,10 @@ class MyApp extends StatelessWidget {
             create: (_) => CharacterBloc(),
 
           ),
+          Provider<StaffBloc>(
+            create: (_) => StaffBloc(),
+
+          ),
         ],
         child: MaterialApp(
       title: 'CrunchyApp',
@@ -56,6 +63,9 @@ class MyApp extends StatelessWidget {
           data: ModalRoute.of(context)!.settings.arguments as AnimeData,
         ),
         '/characters': (context) =>  AllCharacters(
+          id: ModalRoute.of(context)!.settings.arguments as String,
+        ),
+        '/staff': (context) =>  AllStaff(
           id: ModalRoute.of(context)!.settings.arguments as String,
         ),
       },

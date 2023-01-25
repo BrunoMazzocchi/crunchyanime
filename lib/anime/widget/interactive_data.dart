@@ -1,7 +1,9 @@
 import 'package:crunchyanime/anime/widget/overview.dart';
+import 'package:crunchyanime/anime/widget/staff.dart';
 import 'package:flutter/material.dart';
 
 import '../domain/models/anime_data.dart';
+
 
 class InteractiveData extends StatefulWidget {
   final AnimeData data;
@@ -15,379 +17,20 @@ class _InteractiveDataState extends State<InteractiveData> {
 
   late Widget currentInformation = overview;
   late Widget overview;
-
-
+  late Widget staff = StaffWidget(id: "${widget.data.id}");
   @override
   void initState() {
     overview = Overview( id: "${widget.data.id}",);
     super.initState();
   }
 
-  Widget staff() {
-
-    return ListView(
-      scrollDirection: Axis.vertical,
-      padding: const EdgeInsets.only(top: 0),
-      children: [
-        Column(
-          children: [
-            SizedBox(
-              height: 30,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(
-                        width: 100,
-                        decoration: const BoxDecoration(
-                          color: Colors.redAccent,
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                        child: const Text(
-                          "Action",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.normal,
-                            fontFamily: 'SF Pro Display',
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        width: 100,
-                        decoration: const BoxDecoration(
-                          color: Colors.redAccent,
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                        child: const Text(
-                          "Shounen",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.normal,
-                            fontFamily: 'SF Pro Display',
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        width: 100,
-                        decoration: const BoxDecoration(
-                          color: Colors.redAccent,
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                        child: const Text(
-                          "Adventure",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.normal,
-                            fontFamily: 'SF Pro Display',
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        width: 100,
-                        decoration: const BoxDecoration(
-                          color: Colors.redAccent,
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                        child: const Text(
-                          "Comedy",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.normal,
-                            fontFamily: 'SF Pro Display',
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-            Column(
-              children: [
-                SizedBox(
-                  width: double.infinity,
-                  height: 50,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text(
-                        "Characters",
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 15,
-                          fontWeight: FontWeight.normal,
-                          fontFamily: 'SF Pro Display',
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 200,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
-                            width: 120,
-                            height: 200,
-                            decoration: const BoxDecoration(
-                              color: Color.fromRGBO(33, 31, 43, 1),
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  width: 120,
-                                  height: 150,
-                                  decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage("assets/bg/luffy.jpg"),
-                                      fit: BoxFit.cover,
-                                    ),
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                                  ),
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.only(left: 5),
-                                  child: Text(
-                                    "Monkey D. Luffy",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: 'SF Pro Display',
-                                    ),
-                                  ),
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.only(left: 5, bottom: 5),
-                                  child: SizedBox(
-                                    height: 10,
-                                    child: Text(
-                                      "Main",
-                                      style: TextStyle(
-                                        color: Colors.grey,
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: 'SF Pro Display',
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                            width: 120,
-                            height: 200,
-                            decoration: const BoxDecoration(
-                              color: Color.fromRGBO(33, 31, 43, 1),
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  width: 120,
-                                  height: 150,
-                                  decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage("assets/bg/nami.jpg"),
-                                      fit: BoxFit.cover,
-                                    ),
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                                  ),
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.only(left: 5),
-                                  child: Text(
-                                    "Nami",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: 'SF Pro Display',
-                                    ),
-                                  ),
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.only(left: 5, bottom: 5),
-                                  child: SizedBox(
-                                    height: 10,
-                                    child: Text(
-                                      "Main",
-                                      style: TextStyle(
-                                        color: Colors.grey,
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: 'SF Pro Display',
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                            width: 120,
-                            height: 200,
-                            decoration: const BoxDecoration(
-                              color: Color.fromRGBO(33, 31, 43, 1),
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  width: 120,
-                                  height: 150,
-                                  decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage("assets/bg/nico.jpg"),
-                                      fit: BoxFit.cover,
-                                    ),
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                                  ),
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.only(left: 5),
-                                  child: Text(
-                                    "Nico Robin",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: 'SF Pro Display',
-                                    ),
-                                  ),
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.only(left: 5, bottom: 5),
-                                  child: SizedBox(
-                                    height: 10,
-                                    child: Text(
-                                      "Main",
-                                      style: TextStyle(
-                                        color: Colors.grey,
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: 'SF Pro Display',
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                            width: 120,
-                            height: 200,
-                            decoration: const BoxDecoration(
-                              color: Color.fromRGBO(33, 31, 43, 1),
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  width: 120,
-                                  height: 150,
-                                  decoration: const BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage("assets/bg/zoro.jpg"),
-                                      fit: BoxFit.cover,
-                                    ),
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                                  ),
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.only(left: 5),
-                                  child: Text(
-                                    "Zoro",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.normal,
-                                      fontFamily: 'SF Pro Display',
-                                    ),
-                                  ),
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.only(left: 5, bottom: 5),
-                                  child: SizedBox(
-                                    height: 10,
-                                    child: Text(
-                                      "Main",
-                                      style: TextStyle(
-                                        color: Colors.grey,
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: 'SF Pro Display',
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ],
-        )
-      ],
-    );
+  void changeInformation(Widget widget) {
+    setState(() {
+      currentInformation = widget;
+    });
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -422,7 +65,7 @@ class _InteractiveDataState extends State<InteractiveData> {
                   children: [
                     InkWell(
                       onTap: () {
-                        print('Overview');
+                        changeInformation(overview);
                       },
                       child: Container(
                         margin: const EdgeInsets.only(left: 0, top: 10),
@@ -438,9 +81,7 @@ class _InteractiveDataState extends State<InteractiveData> {
                     ),
                     InkWell(
                       onTap: () {
-                        setState(() {
-
-                        });
+                        changeInformation(staff);
                       },
                       child: Container(
                         margin: const EdgeInsets.only(left: 0, top: 10),
