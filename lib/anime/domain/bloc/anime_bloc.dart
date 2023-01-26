@@ -17,17 +17,17 @@ class AnimeBloc implements Bloc {
   final AnimeDataRepository _animeDataRepository = AnimeDataRepository();
 
 
-  Future <List<AnimeData>> getTrending() async {
+  Future <AnimeContainer> getTrending() async {
     return await _categoryAnimeDataRepository.getTrending();
   }
 
 
-  Future <List<AnimeData>> getByCategory(String category) async {
+  Future <AnimeContainer> getByCategory(String category) async {
     return await _categoryAnimeDataRepository.getByCategory(category);
   }
 
 
-  Future <List<AnimeData>> getList(String type) {
+  Future <AnimeContainer> getList(String type) {
     switch(type) {
       case 'trending':
         return getTrending();
@@ -49,10 +49,17 @@ class AnimeBloc implements Bloc {
     return await _animeDataRepository.getCategories(id);
   }
 
-
-
   Future<AnimeContainer> getAllAnime(String type, int page) async {
     return await _animeDataRepository.getAllAnime(type, page);
+  }
+
+  Future <AnimeContainer> getAllAnimeOrAllTrending(String type, int page) {
+    switch(type) {
+      case 'trending':
+        return getTrending();
+      default :
+        return getAllAnime(type, page);
+    }
   }
 
 

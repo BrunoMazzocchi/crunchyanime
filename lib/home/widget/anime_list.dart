@@ -2,6 +2,7 @@ import 'package:crunchyanime/home/widget/anime_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../anime/domain/bloc/anime_bloc.dart';
+import '../../anime/domain/models/anime_container.dart';
 import '../../anime/domain/models/anime_data.dart';
 
 class AnimeList extends StatefulWidget {
@@ -16,7 +17,7 @@ class AnimeList extends StatefulWidget {
 class _AnimeListState extends State<AnimeList> {
 
   late AnimeBloc animeBloc = Provider.of(context, listen: false);
-  late Future<List<AnimeData>> data;
+  late Future<AnimeContainer> data;
 
   @override
   void initState() {
@@ -64,15 +65,15 @@ class _AnimeListState extends State<AnimeList> {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         width: double.infinity,
         height: 220,
-        child: FutureBuilder<List<AnimeData>>(
+        child: FutureBuilder<AnimeContainer>(
           future: data,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: snapshot.data!.length,
+                itemCount: snapshot.data!.data?.length,
                 itemBuilder: (context, index) {
-                  return AnimeCard(data: snapshot.data![index]);
+                  return AnimeCard(data: snapshot.data!.data![index]);
                 },
               );
             } else if (snapshot.hasError) {

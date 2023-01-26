@@ -34,12 +34,12 @@ class _AllAnimeState extends State<AllAnime> {
       _isFirstLoading = true;
     });
     futureAnimeContainer =
-        animeBloc.getAllAnime(widget.type, _page);
+        animeBloc.getAllAnimeOrAllTrending(widget.type, _page);
 
     futureAnimeContainer.then((value) => setState(() {
       _anime = value;
       _isFirstLoading = false;
-      if (value.links!.next != null) {
+      if (value.links?.next != null) {
         _hasNext = true;
       }
     }));
@@ -55,7 +55,7 @@ class _AllAnimeState extends State<AllAnime> {
       });
       _page += 20;
       futureAnimeContainer =
-          animeBloc.getAllAnime(widget.type, _page);
+          animeBloc.getAllAnimeOrAllTrending(widget.type, _page);
 
       futureAnimeContainer.then((value) => setState(() {
         _anime.data!.addAll(value.data!);
