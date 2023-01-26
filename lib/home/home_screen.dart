@@ -141,6 +141,17 @@ class _HomeScreenState extends State<HomeScreen> {
           const  AnimeList(title: 'Magic 🪄', type: 'magic',),
           const  AnimeList(title: 'Time Travel ⌛', type: 'time travel',),
           const  AnimeList(title: 'Comedy 😶‍🌫️', type: 'comedy',),
+          const  AnimeList(title: 'Action 🤺', type: 'action',),
+          const  AnimeList(title: 'Romance 💑', type: 'romance',),
+          const  AnimeList(title: 'School 🏫', type: 'school',),
+          const  AnimeList(title: 'Mystery 🕵️‍♂️', type: 'mystery',),
+          const  AnimeList(title: 'Drama 🎭', type: 'drama',),
+          const  AnimeList(title: 'Horror 👻', type: 'horror',),
+          const  AnimeList(title: 'Psychological 🧠', type: 'psychological',),
+          const  AnimeList(title: 'Seinen 🧔', type: 'seinen',),
+          const  AnimeList(title: 'Sports ⚽', type: 'sports',),
+          const  AnimeList(title: 'Martial Arts 🥋', type: 'martial arts',),
+          const  AnimeList(title: 'Shoujo 👧', type: 'shoujo',),
 
           const SizedBox(
             height: 100,

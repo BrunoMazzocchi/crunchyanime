@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../domain/bloc/staff_bloc.dart';
-import 'character_card.dart';
 
 class StaffWidget extends StatefulWidget {
   final String id;

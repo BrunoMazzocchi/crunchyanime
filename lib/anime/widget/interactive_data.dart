@@ -1,4 +1,5 @@
 import 'package:crunchyanime/anime/widget/overview.dart';
+import 'package:crunchyanime/anime/widget/review.dart';
 import 'package:crunchyanime/anime/widget/staff.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +19,7 @@ class _InteractiveDataState extends State<InteractiveData> {
   late Widget currentInformation = overview;
   late Widget overview;
   late Widget staff = StaffWidget(id: "${widget.data.id}");
+  late Widget reviews = ReviewWidget(id: "${widget.data.id}");
   @override
   void initState() {
     overview = Overview( id: "${widget.data.id}", videoId: '${widget.data.attributes?.youtubeVideoId}',);
@@ -97,7 +99,7 @@ class _InteractiveDataState extends State<InteractiveData> {
                     ),
                     InkWell(
                       onTap: () {
-                        print('Review');
+                        changeInformation(reviews);
                       },
                       child: Container(
                         margin: const EdgeInsets.only(left: 0, top: 10),

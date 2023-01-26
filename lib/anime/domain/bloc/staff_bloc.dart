@@ -1,4 +1,3 @@
-
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 
 import '../models/staff_data.dart';
@@ -6,9 +5,7 @@ import '../models/staff_information.dart';
 import '../repository/staff/staff_repository.dart';
 
 class StaffBloc implements Bloc {
-
-
- final StaffRepository _staffRepository = StaffRepository();
+  final StaffRepository _staffRepository = StaffRepository();
 
   Future<StaffData> getStaff(String id) async {
     return await _staffRepository.getStaff(id);
@@ -18,8 +15,10 @@ class StaffBloc implements Bloc {
     return await _staffRepository.getStaffInformation(id);
   }
 
-
-  Future<StaffData> getAllStaff(String id, int page, ) async {
+  Future<StaffData> getAllStaff(
+    String id,
+    int page,
+  ) async {
     return await _staffRepository.getAllStaff(id, page);
   }
 
@@ -27,8 +26,4 @@ class StaffBloc implements Bloc {
   void dispose() {
     // TODO: implement dispose
   }
-
-
-
-
 }

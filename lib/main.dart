@@ -1,5 +1,6 @@
 import 'package:crunchyanime/anime/all_characters.dart';
 import 'package:crunchyanime/anime/domain/bloc/anime_bloc.dart';
+import 'package:crunchyanime/anime/domain/bloc/review_bloc.dart';
 import 'package:crunchyanime/anime/domain/bloc/staff_bloc.dart';
 import 'package:crunchyanime/anime/domain/models/anime_data.dart';
 import 'package:crunchyanime/home/all_anime.dart';
@@ -53,6 +54,9 @@ class MyApp extends StatelessWidget {
           Provider<StaffBloc>(
             create: (_) => StaffBloc(),
 
+          ),
+          Provider<ReviewBloc>(
+            create: (_) => ReviewBloc(),
           ),
         ],
         child: MaterialApp(
