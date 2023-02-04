@@ -2,6 +2,7 @@ import 'package:crunchyanime/anime/domain/bloc/review_bloc.dart';
 import 'package:crunchyanime/anime/widget/staff_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../domain/models/review_data.dart';
 
@@ -52,7 +53,8 @@ class _ReviewWidgetState extends State<ReviewWidget> {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.pushNamed(context, '/reviews', arguments: widget.id);
+                          SnackBar snackBar = const SnackBar(content: Text('On dev'));
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         },
                         child: const Text(
                           "See all",
@@ -164,11 +166,31 @@ class _ReviewWidgetState extends State<ReviewWidget> {
                           },
                         );
                       }
-                      else if (snapshot.hasError) {
-                        return  Text("${snapshot.error}");
-                      }
-                      return const Center(
-                        child: CircularProgressIndicator(),
+                      return Shimmer(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Colors.grey[300]!,
+                            Colors.grey[100]!,
+                            Colors.grey[300]!,
+                          ],
+                        ),
+                        child: ListView.builder(
+                         itemCount: 10,
+                         itemBuilder: (context, index) {
+                           return Container(
+                             margin: const EdgeInsets.only(bottom: 10),
+                             padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+                             width: double.infinity,
+                             height: 200,
+                             decoration: BoxDecoration(
+                               color: const Color.fromRGBO(33, 31, 43, 1),
+                               borderRadius: BorderRadius.circular(10),
+                             ),
+                           );
+                         }
+                        )
                       );
                     },
                   ),

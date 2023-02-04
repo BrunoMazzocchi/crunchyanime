@@ -1,12 +1,7 @@
-import 'package:crunchyanime/anime/provider/character/character_data_provider.dart';
-import 'package:crunchyanime/anime/widget/character_card.dart';
 import 'package:crunchyanime/anime/widget/staff_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'domain/bloc/character_bloc.dart';
 import 'domain/bloc/staff_bloc.dart';
-import 'domain/models/character_data.dart';
 import 'domain/models/staff_data.dart';
 
 class AllStaff extends StatefulWidget {

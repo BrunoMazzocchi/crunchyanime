@@ -2,6 +2,7 @@ import 'package:crunchyanime/anime/domain/bloc/staff_bloc.dart';
 import 'package:crunchyanime/anime/domain/models/staff_information.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 
 
 class StaffCard extends StatefulWidget {
@@ -99,9 +100,57 @@ class _StaffCardState extends State<StaffCard> {
           );
         }
         else {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return  Shimmer(
+            gradient: const LinearGradient(
+                colors: [Colors.grey, Colors.white, Colors.grey], begin: Alignment.centerLeft, end: Alignment.centerRight),
+            child: Container(
+              margin: const EdgeInsets.only(right: 10),
+              width: 120,
+              height: 200,
+              decoration: const BoxDecoration(
+                color: Color.fromRGBO(33, 31, 43, 1),
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: 120,
+                    height: 150,
+                    decoration: const BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5),
+                    child: Container(
+                      width: 100,
+                      height: 10,
+                      decoration: const BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5, bottom: 5),
+                    child: SizedBox(
+                      height: 10,
+                      child: Container(
+                        width: 50,
+                        height: 10,
+                        decoration: const BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),);
         }
         return const Center(
           child: CircularProgressIndicator(),

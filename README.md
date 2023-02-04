@@ -21,12 +21,12 @@ This is a Flutter-based anime information app that allows users to search and br
 
 # Depedencies
 - Curved navigation bar: A beautiful navigation bar with animations.
-- Dio: To retreive the API rest information and handle errors.
+- Dio: To retrieve the API rest information and handle errors.
 - Generic Bloc Provider: Instead of using all BLoc features, I'm using a generic one. 
 - Provider: To use all blocs in singleton, I'm using provider dependency to call them all via the MultiProvider in the main.dart
-- SQFlite: To store the bookmarked anime and call them later. 
+- SQFLite: To store the bookmarked anime and call them later. 
 - Youtube Player Flutter: To use a widget with the youtube video for each anime. 
-
+- Shimmer: To show a loading animation while the data is being fetched from the API.
 
 # Backend
 

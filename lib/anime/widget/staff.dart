@@ -2,6 +2,7 @@ import 'package:crunchyanime/anime/domain/models/staff_data.dart';
 import 'package:crunchyanime/anime/widget/staff_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../domain/bloc/staff_bloc.dart';
 
@@ -97,11 +98,31 @@ class _StaffWidgetState extends State<StaffWidget> {
                           },
                         );
                       }
-                      else if (snapshot.hasError) {
-                        return  Text("${snapshot.error}");
-                      }
-                      return const Center(
-                        child: CircularProgressIndicator(),
+                      return Shimmer(
+                        gradient: const LinearGradient(
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                          colors: [
+                            Colors.grey,
+                            Colors.white,
+                            Colors.grey,
+                          ],
+                        ),
+                        child: ListView.builder(
+                          itemCount: 5,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              margin: const EdgeInsets.only(right: 10),
+                              height: 200,
+                              width: 100,
+                              decoration: const BoxDecoration(
+                                color: Colors.grey,
+                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                              ),
+                            );
+                          },
+                        ),
                       );
                     },
                   ),

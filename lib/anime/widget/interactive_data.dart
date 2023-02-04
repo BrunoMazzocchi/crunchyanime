@@ -115,7 +115,8 @@ class _InteractiveDataState extends State<InteractiveData> {
                     ),
                     InkWell(
                       onTap: () {
-                        print('Castings');
+                          SnackBar snackBar = const SnackBar(content: Text('On dev'));
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       },
                       child: Container(
                         margin: const EdgeInsets.only(left: 0, top: 10),
