@@ -43,7 +43,9 @@ dependencies:
   provider: ^6.0.5
   sqflite: ^2.2.3
   youtube_player_flutter: ^8.1.2
-
+  flutter_bloc: ^8.1.1
+  http: ^0.13.0
+  stream_transform: ^2.0.0
 
 
 dev_dependencies:
@@ -56,6 +58,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  mocktail: ^0.3.0
+  very_good_analysis: ^3.1.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
