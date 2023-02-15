@@ -3,9 +3,11 @@ import 'package:kitsu_api/kitsu_api.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('KitsuApi', () {
-    test('can be instantiated', () {
-      expect(KitsuApi(), isNotNull);
+  group('KitsuClient', () {
+    test('search', () async {
+      final client = KitsuClient();
+      final result = await client.search('naruto');
+      expect(result.data, greaterThan(0));
     });
   });
 }
