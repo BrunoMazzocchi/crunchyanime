@@ -8,6 +8,7 @@ This is a Flutter-based anime information app that allows users to search and br
 <img src="https://user-images.githubusercontent.com/68037905/214891521-d4bc6bf0-2cba-44a6-99a6-7ff1fc98ddda.png" height="350"/>
 <img src="https://user-images.githubusercontent.com/68037905/214891523-6c771440-2817-4461-be39-a12fe20e3b8e.png" height="350"/>
 <img src="https://user-images.githubusercontent.com/68037905/214891531-82cc1604-74a4-448c-858a-106863a4cf01.png" width="170" height="350"/>
+<img src="https://user-images.githubusercontent.com/68037905/219274155-ec97f4b8-258f-4f55-945b-fde3498bf752.png" width="170" height="350"/>
 
 </h1>
 
