@@ -2,12 +2,12 @@ import 'package:crunchyanime/anime/widget/overview.dart';
 import 'package:crunchyanime/anime/widget/review.dart';
 import 'package:crunchyanime/anime/widget/staff.dart';
 import 'package:flutter/material.dart';
+import 'package:kitsu_api/kitsu_api.dart';
 
-import '../domain/models/anime_data.dart';
 
 
 class InteractiveData extends StatefulWidget {
-  final AnimeData data;
+  final Anime data;
   const InteractiveData({Key? key, required this.data}) : super(key: key);
 
   @override

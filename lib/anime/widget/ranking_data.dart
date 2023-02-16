@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:kitsu_api/kitsu_api.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../../database/database.dart';
 import '../domain/models/anime_data.dart';
 
 class RankingData extends StatefulWidget {
-  final AnimeData data;
+  final Anime data;
   const RankingData({Key? key, required this.data}) : super(key: key);
 
   @override

@@ -1,5 +1,6 @@
 import 'package:crunchyanime/bookmark/screen/bookmark_screen.dart';
 import 'package:crunchyanime/home/home_screen.dart';
+import 'package:crunchyanime/search/search_page.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -27,10 +28,12 @@ class _NavigationControllerState extends State<NavigationController> {
 
     final List<Widget> widgetsChildren = [
       const HomeScreen(),
+      const SearchPage(),
       const BookmarkScreen(),
     ];
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       extendBody: true,
       body: widgetsChildren[_page],
       bottomNavigationBar: CurvedNavigationBar(
@@ -39,6 +42,7 @@ class _NavigationControllerState extends State<NavigationController> {
         height: 70,
         items: const [
           Icon(Icons.tv, size: 30),
+          Icon(Icons.search, size: 30),
           Icon(Icons.bookmark_outline, size: 30),
         ],
         onTap: onTabTapped,
