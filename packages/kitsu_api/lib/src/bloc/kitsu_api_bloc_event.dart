@@ -5,7 +5,7 @@ abstract class KitsuApiBlocEvent extends Equatable {
 }
 
 class TextChanged extends KitsuApiBlocEvent {
-  const TextChanged(this.text);
+  const TextChanged({required this.text});
 
   final String text;
 

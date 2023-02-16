@@ -14,10 +14,9 @@ Titles _$TitlesFromJson(Map<String, dynamic> json) => $checkedCreate(
       ($checkedConvert) {
         final val = Titles(
           en: $checkedConvert('en', (v) => v as String?),
-          enJp: $checkedConvert('en_jp', (v) => v as String?),
-          jaJp: $checkedConvert('ja_jp', (v) => v as String?),
+          enJp: $checkedConvert('enJp', (v) => v as String?),
+          jaJp: $checkedConvert('jaJp', (v) => v as String?),
         );
         return val;
       },
-      fieldKeyMap: const {'enJp': 'en_jp', 'jaJp': 'ja_jp'},
     );

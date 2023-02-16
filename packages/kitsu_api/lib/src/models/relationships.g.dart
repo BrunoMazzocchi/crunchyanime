@@ -45,7 +45,7 @@ Relationships _$RelationshipsFromJson(Map<String, dynamic> json) =>
                   ? null
                   : Reviews.fromJson(v as Map<String, dynamic>)),
           mediaRelationships: $checkedConvert(
-              'media_relationships',
+              'mediaRelationships',
               (v) => v == null
                   ? null
                   : MediaRelationships.fromJson(v as Map<String, dynamic>)),
@@ -74,33 +74,26 @@ Relationships _$RelationshipsFromJson(Map<String, dynamic> json) =>
                   ? null
                   : Episodes.fromJson(v as Map<String, dynamic>)),
           streamingLinks: $checkedConvert(
-              'streaming_links',
+              'streamingLinks',
               (v) => v == null
                   ? null
                   : StreamingLinks.fromJson(v as Map<String, dynamic>)),
           animeProductions: $checkedConvert(
-              'anime_productions',
+              'animeProductions',
               (v) => v == null
                   ? null
                   : AnimeProductions.fromJson(v as Map<String, dynamic>)),
           animeCharacters: $checkedConvert(
-              'anime_characters',
+              'animeCharacters',
               (v) => v == null
                   ? null
                   : AnimeCharacters.fromJson(v as Map<String, dynamic>)),
           animeStaff: $checkedConvert(
-              'anime_staff',
+              'animeStaff',
               (v) => v == null
                   ? null
                   : AnimeStaff.fromJson(v as Map<String, dynamic>)),
         );
         return val;
-      },
-      fieldKeyMap: const {
-        'mediaRelationships': 'media_relationships',
-        'streamingLinks': 'streaming_links',
-        'animeProductions': 'anime_productions',
-        'animeCharacters': 'anime_characters',
-        'animeStaff': 'anime_staff'
       },
     );
