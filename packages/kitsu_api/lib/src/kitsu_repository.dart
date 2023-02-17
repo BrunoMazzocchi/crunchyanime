@@ -22,5 +22,9 @@ class KitsuRepository{
     return result;
   }
 
+  Future<List<Anime>> getTrendingAnime() async {
+    final result = await client.getTrendingAnime();
+    return result;
+  }
 
 }

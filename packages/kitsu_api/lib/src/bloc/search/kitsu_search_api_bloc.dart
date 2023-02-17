@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../models/models.dart';
+import '../../models/models.dart';
 import 'package:stream_transform/stream_transform.dart';
-import '../kitsu_repository.dart';
+import '../../kitsu_repository.dart';
 
-part 'kitsu_api_bloc_event.dart';
-part 'kitsu_api_bloc_state.dart';
+part 'kitsu_search_api_event.dart';
+part 'kitsu_search_api_state.dart';
 
 const _duration = const Duration(milliseconds: 300);
 
@@ -13,8 +13,8 @@ EventTransformer<Event> debounce<Event>(Duration duration) {
   return (events, mapper) => events.debounce(duration).switchMap(mapper);
 }
 
-class KitsuApiBloc extends Bloc<KitsuApiBlocEvent, KitsuApiBlocState> {
-  KitsuApiBloc({required this.kitsuRepository})
+class KitsuSearchApiBloc extends Bloc<KitsuSearchApiEvent, KitsuSearchApiState> {
+  KitsuSearchApiBloc({required this.kitsuRepository})
       : super(SearchStateEmpty()) {
     on<TextChanged>(_onTextChanged, transformer: debounce(_duration));
   }
@@ -23,7 +23,7 @@ class KitsuApiBloc extends Bloc<KitsuApiBlocEvent, KitsuApiBlocState> {
 
   void _onTextChanged(
       TextChanged event,
-      Emitter<KitsuApiBlocState> emit,
+      Emitter<KitsuSearchApiState> emit,
       ) async {
     final searchTerm = event.text;
 

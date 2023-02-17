@@ -1,10 +1,10 @@
-part of 'kitsu_api_bloc_bloc.dart';
+part of 'kitsu_search_api_bloc.dart';
 
-abstract class KitsuApiBlocEvent extends Equatable {
-  const KitsuApiBlocEvent();
+abstract class KitsuSearchApiEvent extends Equatable {
+  const KitsuSearchApiEvent();
 }
 
-class TextChanged extends KitsuApiBlocEvent {
+class TextChanged extends KitsuSearchApiEvent {
   const TextChanged({required this.text});
 
   final String text;

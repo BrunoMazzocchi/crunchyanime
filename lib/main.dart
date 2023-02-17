@@ -4,17 +4,20 @@ import 'package:crunchyanime/anime/domain/bloc/review_bloc.dart';
 import 'package:crunchyanime/anime/domain/bloc/staff_bloc.dart';
 import 'package:crunchyanime/home/all_anime.dart';
 import 'package:crunchyanime/navigation_controller.dart';
+import 'package:crunchyanime/simple_bloc_observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kitsu_api/kitsu_api.dart';
 import 'package:provider/provider.dart';
 
 import 'anime/all_staff.dart';
 import 'anime/domain/bloc/character_bloc.dart';
 import 'anime/open_anime_screen.dart';
-import 'anime/provider/staff/staff_provider.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
+  Bloc.observer = const SimpleBlocObserver();
   final KitsuRepository kitsuRepository = KitsuRepository(
     KitsuClientCache(),
     KitsuClient(),
@@ -64,8 +67,11 @@ class App extends StatelessWidget {
           Provider<ReviewBloc>(
             create: (_) => ReviewBloc(),
           ),
-          Provider<KitsuApiBloc>(
-            create: (_) => KitsuApiBloc(kitsuRepository: kitsuRepository),
+          Provider<KitsuSearchApiBloc>(
+            create: (_) => KitsuSearchApiBloc(kitsuRepository: kitsuRepository),
+          ),
+          Provider<KitsuTrendingBloc>(
+            create: (_) => KitsuTrendingBloc(httpClient: http.Client())..add(AnimeFetched()),
           ),
         ],
         child: MaterialApp(

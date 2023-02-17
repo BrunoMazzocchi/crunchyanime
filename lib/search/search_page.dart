@@ -45,11 +45,11 @@ class _SearchBar extends StatefulWidget {
 
 class _SearchBarState extends State<_SearchBar> {
   final _textController = TextEditingController();
-  late KitsuApiBloc _kitsuApiBloc;
+  late KitsuSearchApiBloc _kitsuApiBloc;
 
   @override
   void initState() {
-    _kitsuApiBloc = context.read<KitsuApiBloc>();
+    _kitsuApiBloc = context.read<KitsuSearchApiBloc>();
     super.initState();
   }
 
@@ -111,7 +111,7 @@ class _SearchBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<KitsuApiBloc, KitsuApiBlocState>(
+    return BlocBuilder<KitsuSearchApiBloc, KitsuSearchApiState>(
       builder: (context, state) {
         if(state is SearchStateLoading){
           return  Center(
