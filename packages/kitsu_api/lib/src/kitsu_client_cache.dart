@@ -1,4 +1,4 @@
-import 'models/models.dart'; 
+import 'models/anime/models.dart';
 
 // It saves prev queries to avoid making unnecessary network calls
 

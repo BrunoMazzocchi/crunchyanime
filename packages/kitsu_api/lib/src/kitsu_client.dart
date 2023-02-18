@@ -1,4 +1,4 @@
-import 'models/models.dart';
+import 'models/anime/models.dart';
 import 'dart:async'; 
 import 'dart:convert';
 

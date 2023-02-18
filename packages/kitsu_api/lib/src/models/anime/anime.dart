@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'attributes.dart';
 import 'relationships.dart';
-import 'links.dart';
+import '../shared/links.dart';
 part 'anime.g.dart';
 
 @JsonSerializable()

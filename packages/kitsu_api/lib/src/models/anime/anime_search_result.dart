@@ -1,8 +1,8 @@
 // Even the anime is composed by different parts, when we search an anime it includes multiple data
 
 import 'anime.dart';
-import 'meta.dart';
-import 'links.dart';
+import '../shared/meta.dart';
+import '../shared/links.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'anime_search_result.g.dart';
 @JsonSerializable()

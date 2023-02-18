@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'dimensions.dart';
+import '../anime/dimensions.dart';
 part 'meta.g.dart';
 @JsonSerializable()
 class Meta {

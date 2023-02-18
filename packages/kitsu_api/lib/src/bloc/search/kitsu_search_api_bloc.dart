@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../models/models.dart';
+import '../../models/anime/models.dart';
 import 'package:stream_transform/stream_transform.dart';
 import '../../kitsu_repository.dart';
 

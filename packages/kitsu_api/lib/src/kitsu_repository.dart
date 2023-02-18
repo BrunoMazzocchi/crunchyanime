@@ -1,5 +1,5 @@
 import 'kitsu_client_cache.dart';
-import 'models/models.dart';
+import 'models/anime/models.dart';
 import 'kitsu_client.dart';
 
 class KitsuRepository{

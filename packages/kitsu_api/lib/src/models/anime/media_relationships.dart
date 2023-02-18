@@ -1,4 +1,4 @@
-import 'links.dart';
+import '../shared/links.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'media_relationships.g.dart';
 @JsonSerializable()

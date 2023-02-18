@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'meta.dart';
+import '../shared/meta.dart';
 part 'poster_image.g.dart';
 @JsonSerializable()
 class PosterImage {

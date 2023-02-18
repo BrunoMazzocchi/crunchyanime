@@ -1,5 +1,5 @@
 
-import 'links.dart';
+import '../shared/links.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'genres.g.dart';
 @JsonSerializable()
