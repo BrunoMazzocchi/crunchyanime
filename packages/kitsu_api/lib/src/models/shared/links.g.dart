@@ -18,6 +18,7 @@ Links _$LinksFromJson(Map<String, dynamic> json) => $checkedCreate(
           first: $checkedConvert('first', (v) => v as String?),
           next: $checkedConvert('next', (v) => v as String?),
           last: $checkedConvert('last', (v) => v as String?),
+          prev: $checkedConvert('prev', (v) => v as String?),
         );
         return val;
       },

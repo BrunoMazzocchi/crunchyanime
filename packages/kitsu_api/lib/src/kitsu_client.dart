@@ -53,5 +53,24 @@ class KitsuClient{
       throw Exception('error fetching anime');
     }
   }
+
+/*  Future<CharacterData> fetchCharacters(String id) async {
+    final String baseUrl = 'https://kitsu.io/api/edge/anime/$id/characters';
+    late CharacterData data;
+
+    try {
+      Response response = await _dio.get(baseUrl);
+      if (response.statusCode == 200) {
+        data = CharacterData.fromJson(response.data);
+      } else {
+        throw Exception('Failed to load anime');
+      }
+    } catch (e) {
+      throw Exception('Failed to load anime');
+    }
+
+    return data;
+  }*/
+
 }
 
