@@ -11,20 +11,61 @@ class AnimeList extends StatefulWidget {
 }
 
 class _AnimeListState extends State<AnimeList> {
-  @override
-  Widget build(BuildContext context) {
+
+  Widget result  () {
+    return Column(
+      children: [
+        SizedBox(
+          width: double.infinity,
+          child:  BlocBuilder<KitsuHomeBloc, KitsuHomeState>(
+            builder: (context, state) {
+              switch (state.status) {
+                case AnimeStatus.success:
+                  if(state.status == AnimeStatus.success && state.trendingAnime.isEmpty){
+                    return const Center(child: Text('No Anime Found'));
+                  }
+                  return Column(
+                    children: [
+                      topList(state.trendingAnime, 'Trending'),
+                      topList(state.firstTopCategory, 'Shounen'),
+                      topList(state.secondTopCategory, 'Action'),
+                      topList(state.thirdTopCategory, 'Mecha'),
+                      topList(state.fourthTopCategory, 'Romance'),
+                    ],
+                  );
+                case AnimeStatus.failure:
+                  return const Center(child: Text('Something went wrong'));
+
+                case AnimeStatus.initial:
+                  return Container(
+                    margin: const EdgeInsets.only(top: 20),
+                    height: 220,
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: _shimmer(),
+                  );
+              }
+
+            },
+          ),
+        )
+      ],
+    );
+  }
+
+
+  Widget topList(List<Anime> anime, String? title) {
     return Column(
       children: [
         Container(
           width: double.infinity,
           height: 50,
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                'Anime',
-                style: TextStyle(
+               Text(
+                title ?? '',
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.normal,
@@ -33,11 +74,11 @@ class _AnimeListState extends State<AnimeList> {
               ),
               InkWell(
                 onTap: () {
-                  //    Navigator.pushNamed(context, '/all_anime', arguments: widget.type);
+                  Navigator.pushNamed(context, '/all_anime', arguments: '$title');
                 },
-                child: const Text(
-                  'See All ${'Anime'}',
-                  style: TextStyle(
+                child:  Text(
+                  'See All $title',
+                  style:  const TextStyle(
                     color: Colors.grey,
                     fontSize: 14,
                     fontWeight: FontWeight.normal,
@@ -49,38 +90,36 @@ class _AnimeListState extends State<AnimeList> {
           ),
         ),
         Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            margin: const EdgeInsets.only(bottom: 10),
             width: double.infinity,
             height: 220,
-            child: BlocBuilder<KitsuTrendingBloc, KitsuTrendingState>(
-              builder: (context, state) {
-                switch (state.status) {
-                  case AnimeStatus.success:
-                    if(state.anime.isEmpty){
-                      return const Center(child: Text('No Anime Found'));
-                    }
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (BuildContext context, int index) {
-                        return index >= state.anime.length
-                            ?  _shimmer()
-                            : AnimeCard(data: state.anime[index]);
-                      },
-                      itemCount: state.anime.length,
-                    );
-                  case AnimeStatus.failure:
-                    return const Center(child: Text('Something went wrong'));
-
-                  case AnimeStatus.initial:
-                    return _shimmer();
-                }
-
+            child: ListView.builder(
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (BuildContext context, int index) {
+                return index >= anime.length
+                    ?  _shimmer()
+                    : AnimeCard(data: anime[index]);
               },
+              itemCount: anime.length,
             )),
       ],
     );
   }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return result();
+  }
+
+
+
+
+
+
+
 
   Shimmer _shimmer() {
     return Shimmer(

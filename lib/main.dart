@@ -70,8 +70,8 @@ class App extends StatelessWidget {
           Provider<KitsuSearchApiBloc>(
             create: (_) => KitsuSearchApiBloc(kitsuRepository: kitsuRepository),
           ),
-          Provider<KitsuTrendingBloc>(
-            create: (_) => KitsuTrendingBloc(httpClient: http.Client())..add(AnimeFetched()),
+          Provider<KitsuHomeBloc>(
+            create: (_) => KitsuHomeBloc(kitsuRepository: kitsuRepository )..add(AnimeFetched()),
           ),
         ],
         child: MaterialApp(

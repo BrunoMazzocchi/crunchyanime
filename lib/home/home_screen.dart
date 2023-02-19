@@ -2,6 +2,7 @@ import 'package:crunchyanime/home/widget/anime_list.dart';
 import 'package:flutter/material.dart';
 
 
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -10,6 +11,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
   int _gif = 0;
 
   onTabTapped(int index) {
@@ -78,66 +80,66 @@ class _HomeScreenState extends State<HomeScreen> {
           end: Alignment.bottomLeft,
         ),
       ),
-      child: ListView(
-        padding: const EdgeInsets.all(0),
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.only(bottom: 90),
         scrollDirection: Axis.vertical,
-        children: [
-          Stack(
+        child: Column(
             children: [
-              Container(
-                width: double.infinity,
-                height: 350,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(topBarGif[_gif]),
-                    fit: BoxFit.cover,
+              Stack(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: 350,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(topBarGif[_gif]),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(30),
+                        bottomRight: Radius.circular(30),
+                      ),
+                      border: Border.all(
+                        color: Colors.black,
+                        width: 1,
+                      ),
+                    ),
                   ),
-                  borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(30),
-                    bottomRight: Radius.circular(30),
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                onTabTapped(0);
+                              },
+                              icon: _gif == 0 ? _icon : _currentIcon),
+                          IconButton(
+                              onPressed: () {
+                                onTabTapped(1);
+                              },
+                              icon: _gif == 1 ? _icon : _currentIcon),
+                          IconButton(
+                              onPressed: () {
+                                onTabTapped(2);
+                              },
+                              icon: _gif == 2 ? _icon : _currentIcon),
+                        ],
+                      ),
+                    ),
                   ),
-                  border: Border.all(
-                    color: Colors.black,
-                    width: 1,
-                  ),
-                ),
+                ],
               ),
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: SizedBox(
-                  width: 50,
-                  height: 50,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      IconButton(
-                          onPressed: () {
-                            onTabTapped(0);
-                          },
-                          icon: _gif == 0 ? _icon : _currentIcon),
-                      IconButton(
-                          onPressed: () {
-                            onTabTapped(1);
-                          },
-                          icon: _gif == 1 ? _icon : _currentIcon),
-                      IconButton(
-                          onPressed: () {
-                            onTabTapped(2);
-                          },
-                          icon: _gif == 2 ? _icon : _currentIcon),
-                    ],
-                  ),
-                ),
-              ),
+              const  AnimeList(),
+
             ],
-          ),
-          const  AnimeList(),
-          const SizedBox(
-            height: 100,
-          ),
-        ],
+        ),
       ),
     );
   }

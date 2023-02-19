@@ -4,6 +4,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
+import 'models/category/models.dart';
+
 class KitsuClient{ 
   KitsuClient({ 
     http.Client? httpClient, 
@@ -23,20 +25,33 @@ class KitsuClient{
     }
   }
 
-  Future<List<Anime>> getTrendingAnime() async {
-    List<Anime> trendingAnime = [];
-    final response = await httpClient.get(Uri.parse("https://kitsu.io/api/edge/trending/anime"));
-    final results = json.decode(response.body);
-    if(response.statusCode == 200) {
-      for(var i = 0; i < results['data'].length; i++){
-        trendingAnime.add(Anime.fromJson(results['data'][i]));
-      }
-    } else {
-      throw SearchResultError.fromJson(results);
-    }
+  Future<List<Anime>> fetchAnime() async {
+    final response = await httpClient.get(
+      Uri.https(
+        'kitsu.io',
+        '/api/edge/trending/anime',
+      ),
+    );
 
-    return trendingAnime;
+    if (response.statusCode == 200) {
+      final body = json.decode(response.body) as Map<String, dynamic>;
+      final data = body['data'] as List;
+      return data.map((dynamic json) => Anime.fromJson(json)).toList();
+    } else {
+      throw Exception('error fetching anime');
+    }
   }
 
+  Future<List<Anime>> fetchByCategory(String category) async {
+    final response = await httpClient.get(Uri.parse("${baseUrl}anime?filter[categories]=${category}"));
+
+    if (response.statusCode == 200) {
+      final body = json.decode(response.body) as Map<String, dynamic>;
+      final data = body['data'] as List;
+      return data.map((dynamic json) => Anime.fromJson(json)).toList();
+    } else {
+      throw Exception('error fetching anime');
+    }
+  }
 }
 

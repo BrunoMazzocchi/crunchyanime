@@ -9,8 +9,10 @@ class Links {
     this.first,
     this.next,
     this.last,
+    this.prev,
   });
   factory Links.fromJson(Map<String, dynamic> json) => _$LinksFromJson(json);
+  final String? prev;
   final String? first; 
   final String? next; 
   final String? last;

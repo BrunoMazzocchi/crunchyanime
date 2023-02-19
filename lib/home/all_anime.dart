@@ -1,13 +1,9 @@
 import 'package:crunchyanime/anime/domain/bloc/anime_bloc.dart';
 import 'package:crunchyanime/anime/domain/models/anime_container.dart';
-import 'package:crunchyanime/anime/provider/character/character_data_provider.dart';
-import 'package:crunchyanime/anime/widget/character_card.dart';
 import 'package:crunchyanime/home/widget/anime_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../anime/domain/bloc/character_bloc.dart';
-import '../anime/domain/models/character_data.dart';
 
 class AllAnime extends StatefulWidget {
   final String type;
