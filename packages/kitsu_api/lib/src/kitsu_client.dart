@@ -1,3 +1,6 @@
+import 'package:kitsu_api/src/models/characters/character.dart';
+import 'package:kitsu_api/src/models/characters/character_search_result.dart';
+
 import 'models/anime/models.dart';
 import 'dart:async'; 
 import 'dart:convert';
@@ -44,7 +47,6 @@ class KitsuClient{
 
   Future<List<Anime>> fetchByCategory(String category) async {
     final response = await httpClient.get(Uri.parse("${baseUrl}anime?filter[categories]=${category}"));
-
     if (response.statusCode == 200) {
       final body = json.decode(response.body) as Map<String, dynamic>;
       final data = body['data'] as List;
@@ -54,23 +56,21 @@ class KitsuClient{
     }
   }
 
-/*  Future<CharacterData> fetchCharacters(String id) async {
-    final String baseUrl = 'https://kitsu.io/api/edge/anime/$id/characters';
-    late CharacterData data;
-
+  Future<CharacterSearchResult> fetchCharacters(String id) async {
+    final String baseUrl = 'https://kitsu.io/api/edge/anime/12/characters';
+    late CharacterSearchResult data;
     try {
-      Response response = await _dio.get(baseUrl);
+      final response = await httpClient.get(Uri.parse(baseUrl));
       if (response.statusCode == 200) {
-        data = CharacterData.fromJson(response.data);
+        data = json.decode(response.body);
       } else {
         throw Exception('Failed to load anime');
       }
     } catch (e) {
       throw Exception('Failed to load anime');
     }
-
     return data;
-  }*/
+  }
 
 }
 

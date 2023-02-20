@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../anime/attributes.dart';
-import '../anime/relationships.dart';
+import 'attributes.dart';
+import 'relationships.dart';
 import '../shared/links.dart';
 
 part 'character.g.dart';

@@ -8,10 +8,10 @@ part 'character_search_result.g.dart';
 
 @JsonSerializable()
 class CharacterSearchResult {
-  CharacterSearchResult({
-    required this.data,
-    required this.links,
-    required this.meta,
+  const CharacterSearchResult({
+     this.data,
+     this.links,
+     this.meta,
   });
 
   final List<Character>? data;

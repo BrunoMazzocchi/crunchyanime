@@ -1,3 +1,5 @@
+import 'package:kitsu_api/src/models/characters/character_search_result.dart';
+
 import 'kitsu_client.dart';
 import 'kitsu_client_cache.dart';
 import 'models/anime/models.dart';
@@ -21,12 +23,14 @@ class KitsuRepository {
   }
 
   Future<List<Anime>> getTrendingAnime() async {
-    final result = await client.fetchAnime();
-    return result;
+    return await client.fetchAnime();
   }
 
   Future<List<Anime>> getByCategory(String category) async {
-    final result = await client.fetchByCategory(category);
-    return result;
+    return await client.fetchByCategory(category);
+  }
+
+  Future<CharacterSearchResult> getCharacters(String id) async {
+    return await client.fetchCharacters(id);
   }
 }
