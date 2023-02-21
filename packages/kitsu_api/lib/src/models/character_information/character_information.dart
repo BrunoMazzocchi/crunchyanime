@@ -24,4 +24,9 @@ class CharacterInformation {
 
   factory CharacterInformation.fromJson(Map<String, dynamic> json) =>
       _$CharacterInformationFromJson(json);
+
+  static final empty = CharacterInformation(
+    id: 'Not found',
+    type: 'Not found',
+  );
 }

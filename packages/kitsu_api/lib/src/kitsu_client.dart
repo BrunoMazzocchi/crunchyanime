@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:http/http.dart' as http;
 import 'package:kitsu_api/kitsu_api.dart';
@@ -67,21 +68,19 @@ class KitsuClient {
       throw Exception('error fetching anime');
     }
   }
-
-  Future<CharacterInformation> fetchCharacterInformation(String self) async {
-    late CharacterInformation data;
-    try {
-      final response = await httpClient.get(Uri.parse(self));
-      if (response.statusCode == 200) {
-        data = json.decode(response.body);
-      } else {
-        throw Exception('Failed to load character data');
-      }
-    } catch (e) {
-      throw Exception('Failed to character data');
+  Future<CharacterInformationResult> fetchCharacterInformation(String id) async {
+    final String baseUrl = 'https://kitsu.io/api/edge/media-characters/$id/character';
+    final response = await httpClient.get(Uri.parse(baseUrl));
+    if (response.statusCode == 200) {
+      final body = json.decode(response.body) as Map<String, dynamic>;
+      final data = body['data'] as Map<String, dynamic>;
+      print(CharacterInformationResult.fromJson(data).data);
+      return CharacterInformationResult.fromJson(body['data']);
+    } else {
+      throw Exception('error fetching character information');
     }
-    return data;
   }
+
 
   Future<CategorySearchResult> fetchAnimeCategories(String id) async {
     final String baseUrl = 'https://kitsu.io/api/edge/anime/$id/categories';

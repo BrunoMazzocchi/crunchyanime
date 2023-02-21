@@ -10,3 +10,4 @@ export 'src/models/category/models.dart';
 export 'src/bloc/home/kitsu_home_bloc.dart';
 export 'src/bloc/open_anime/kitsu_anime_bloc.dart';
 export 'src/models/character_information/models.dart';
+export 'src/bloc/character/character_cubit.dart';
