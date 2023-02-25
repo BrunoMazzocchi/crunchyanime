@@ -138,11 +138,11 @@ class _AllCharactersState extends State<AllCharacters> {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      CharacterCard(
+                      /*CharacterCard(
                         id: _characters.data?[index].id,
                         role: "${_characters.data?[index].attributes?.role}",
                         roleCare: false,
-                      ),
+                      ),*/
                     ],
                   );
                 },

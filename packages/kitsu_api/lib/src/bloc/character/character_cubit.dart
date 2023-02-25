@@ -16,11 +16,13 @@ class CharacterCubit extends Cubit<CharacterState> {
   Future<void> getCharacter(String id) async {
     emit(state.copyWith(status: CharacterStatus.loading));
     try {
-      final character = await _characterRepository.getCharacterInformation(id);
-      emit(state.copyWith(
-        status: CharacterStatus.loaded,
-        characterInformation: character,
-      ));
+      if(state.status == CharacterStatus.loading) {
+        final character = await _characterRepository.getCharacterInformation(id);
+        emit(state.copyWith(
+          status: CharacterStatus.loaded,
+          characterInformationResult: character,
+        ));
+      }
     } on Exception {
       emit(state.copyWith(status: CharacterStatus.error));
     }

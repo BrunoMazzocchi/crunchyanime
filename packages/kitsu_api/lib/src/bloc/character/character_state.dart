@@ -13,12 +13,12 @@ class CharacterState extends Equatable {
   factory CharacterState.fromJson(Map<String, dynamic> json) => _$CharacterStateFromJson(json);
 
   final CharacterStatus status;
-  final CharacterInformationResult characterInformationResult;
+  final CharacterInformationResult? characterInformationResult;
 
 
   CharacterState copyWith({
     CharacterStatus? status,
-    CharacterInformationResult? characterInformation,
+    CharacterInformationResult? characterInformationResult,
   }) {
     return CharacterState(
       status: status ?? this.status,

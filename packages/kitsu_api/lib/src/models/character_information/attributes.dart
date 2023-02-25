@@ -1,6 +1,9 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'image.dart';
+import 'names.dart';
+
 part 'attributes.g.dart';
 
 @JsonSerializable()
@@ -12,22 +15,28 @@ class Attributes {
     this.slug,
     this.description,
     this.canonicalName,
-    this.otherNames,
     this.name,
-    this.image,
     this.malId,
+    this.names,
+    this.image,
+    this.otherNames = const [],
+
 });
 
- final String? createdAt;
-  final  String? updatedAt;
+  final String? createdAt;
+  final String? updatedAt;
   final String? slug;
-  final  String? description;
-  final  String? canonicalName;
-  final  List<String>? otherNames;
-  final  String? name;
-  final String? image;
-  final String? malId;
+  final Names? names;
+  final String? canonicalName;
+  final String? name;
+  final num? malId;
+  final String? description;
+  final Image? image;
+  final List<Object> otherNames;
 
   factory Attributes.fromJson(Map<String, dynamic> json) =>
       _$AttributesFromJson(json);
 }
+
+
+

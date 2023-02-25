@@ -26,11 +26,6 @@ CharacterInformation _$CharacterInformationFromJson(
               (v) => v == null
                   ? null
                   : Attributes.fromJson(v as Map<String, dynamic>)),
-          relationships: $checkedConvert(
-              'relationships',
-              (v) => v == null
-                  ? null
-                  : Relationships.fromJson(v as Map<String, dynamic>)),
         );
         return val;
       },

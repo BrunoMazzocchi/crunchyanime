@@ -18,11 +18,21 @@ Attributes _$AttributesFromJson(Map<String, dynamic> json) => $checkedCreate(
           slug: $checkedConvert('slug', (v) => v as String?),
           description: $checkedConvert('description', (v) => v as String?),
           canonicalName: $checkedConvert('canonicalName', (v) => v as String?),
-          otherNames: $checkedConvert('otherNames',
-              (v) => (v as List<dynamic>?)?.map((e) => e as String).toList()),
           name: $checkedConvert('name', (v) => v as String?),
-          image: $checkedConvert('image', (v) => v as String?),
-          malId: $checkedConvert('malId', (v) => v as String?),
+          malId: $checkedConvert('malId', (v) => v as num?),
+          names: $checkedConvert(
+              'names',
+              (v) =>
+                  v == null ? null : Names.fromJson(v as Map<String, dynamic>)),
+          image: $checkedConvert(
+              'image',
+              (v) =>
+                  v == null ? null : Image.fromJson(v as Map<String, dynamic>)),
+          otherNames: $checkedConvert(
+              'otherNames',
+              (v) =>
+                  (v as List<dynamic>?)?.map((e) => e as Object).toList() ??
+                  const []),
         );
         return val;
       },

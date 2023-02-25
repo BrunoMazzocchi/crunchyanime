@@ -73,9 +73,8 @@ class KitsuClient {
     final response = await httpClient.get(Uri.parse(baseUrl));
     if (response.statusCode == 200) {
       final body = json.decode(response.body) as Map<String, dynamic>;
-      final data = body['data'] as Map<String, dynamic>;
-      print(CharacterInformationResult.fromJson(data).data);
-      return CharacterInformationResult.fromJson(body['data']);
+      print(id);
+      return CharacterInformationResult.fromJson(body);
     } else {
       throw Exception('error fetching character information');
     }

@@ -11,19 +11,22 @@ part 'kitsu_anime_state.dart';
 
 class KitsuAnimeBloc extends Bloc<KitsuAnimeEvent, KitsuAnimeState> {
   KitsuAnimeBloc({
-   required this.kitsuRepository,
+    required this.kitsuRepository,
   }) : super(const KitsuAnimeState()) {
     on<AnimeInformationFetched>(_onAnimeOpen,
         transformer: throttleDroppable(throttleDuration));
   }
 
   final KitsuRepository kitsuRepository;
-  Future<void> _onAnimeOpen(AnimeInformationFetched event,
-      Emitter<KitsuAnimeState> emit) async {
+
+  Future<void> _onAnimeOpen(
+      AnimeInformationFetched event, Emitter<KitsuAnimeState> emit) async {
     try {
       if (state.status == AnimeInformationState.initial) {
-        final characterSearchResult = await kitsuRepository.getCharacters(event.id ?? "");
-        final animeCategory = await kitsuRepository.getAnimeCategories(event.id ?? "");
+        final characterSearchResult =
+            await kitsuRepository.getCharacters(event.id ?? "");
+        final animeCategory =
+            await kitsuRepository.getAnimeCategories(event.id ?? "");
         return emit(state.copyWith(
           status: AnimeInformationState.success,
           animeCategory: animeCategory,
@@ -34,5 +37,4 @@ class KitsuAnimeBloc extends Bloc<KitsuAnimeEvent, KitsuAnimeState> {
       emit(state.copyWith(status: AnimeInformationState.failure));
     }
   }
-
 }

@@ -26,7 +26,6 @@ class KitsuAnimeState extends Equatable {
   );
 
   @override
-  // TODO: implement props
-  List<Object> get props => [characterSearchResult, animeCategory, status];
+  List<Object> get props => [characterSearchResult, animeCategory,  status];
 
 }

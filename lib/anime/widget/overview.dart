@@ -1,39 +1,26 @@
-
 import 'package:crunchyanime/anime/widget/character_card.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kitsu_api/kitsu_api.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-
-import '../domain/bloc/anime_bloc.dart';
-import '../domain/bloc/character_bloc.dart';
-import '../domain/models/categories_data.dart';
-import '../domain/models/character_data.dart';
 
 class Overview extends StatefulWidget {
   final String id;
   final String videoId;
-  const Overview({Key? key, required this.id, required this.videoId}) : super(key: key);
+
+  const Overview({Key? key, required this.id, required this.videoId})
+      : super(key: key);
 
   @override
   State<Overview> createState() => _OverviewState();
 }
 
 class _OverviewState extends State<Overview> {
-  late CharacterBloc  characterBloc = Provider.of(context, listen: false);
-  late AnimeBloc  animeBloc = Provider.of(context, listen: false);
-  late Future<CharacterData>  data;
-  late Future<CategoriesData> categoriesData;
   late YoutubePlayerController _controller;
-
-
-
-
-
+  late CharacterInformation characterInformation;
   @override
   void initState() {
-    data = characterBloc.getCharacters(widget.id);
-    categoriesData = animeBloc.getCategories(widget.id);
     _controller = YoutubePlayerController(
       initialVideoId: widget.videoId,
       flags: const YoutubePlayerFlags(
@@ -59,80 +46,55 @@ class _OverviewState extends State<Overview> {
           children: [
             SizedBox(
               height: 30,
-              child: FutureBuilder<CategoriesData> (
-                future: categoriesData,
-                builder: (context, snapshot) {
-                  if(snapshot.hasData) {
-                    if(snapshot.data?.meta?.count==0) {
-
-                      return const Center(
-                        child: Text("No categories defined at the moment, probably another shonen anime",
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 12,
-                            fontWeight: FontWeight.normal,
-                            fontFamily: 'SF Pro Display',
-                          ),
-                        ),
-                      );
-                    }
-
-                    return ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: snapshot.data!.data?.length,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                          margin: const EdgeInsets.only(right: 10),
-                          width: 100,
-                          decoration: const BoxDecoration(
-                            color: Colors.redAccent,
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                          ),
-                          child:  Text(
-                            snapshot.data!.data![index].attributes!.name!,
-                            style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.normal,
-                            fontFamily: 'SF Pro Display',
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
+              child: BlocBuilder<KitsuAnimeBloc, KitsuAnimeState>(
+                  builder: (context, state) {
+                    switch (state.status) {
+                      case AnimeInformationState.initial:
+                        return categoriesShimmer();
+                      case AnimeInformationState.success:
+                        return ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: state.characterSearchResult.data?.length,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 5, horizontal: 5),
+                              margin: const EdgeInsets.only(right: 10),
+                              width: 100,
+                              decoration: const BoxDecoration(
+                                color: Colors.redAccent,
+                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                              ),
+                              child: Text(
+                                state.animeCategory.data?[index].attributes?.title ??
+                                    "No title",
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.normal,
+                                  fontFamily: 'SF Pro Display',
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            );
+                          },
                         );
-                      },
-                    );
-                  } else {
-                    return Shimmer(
-                      gradient: const LinearGradient(
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                        colors: [
-                          Colors.grey,
-                          Colors.white,
-                          Colors.grey,
-                        ],
-                      ),
-                      child: ListView.builder(
-                        itemCount: 5,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            margin: const EdgeInsets.only(right: 10),
-                            height: 30,
-                            width: 100,
-                            decoration: const BoxDecoration(
+                      case AnimeInformationState.failure:
+                        return const Center(
+                          child: Text(
+                            "No categories defined at the moment",
+                            style: TextStyle(
                               color: Colors.grey,
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                              fontSize: 12,
+                              fontWeight: FontWeight.normal,
+                              fontFamily: 'SF Pro Display',
                             ),
-                          );
-                        },
-                      ),
-                    );
-                  }
-                } ,
+                          ),
+                        );
+                    }
+                  },
+                ),
               ),
-            ),
             Column(
               children: [
                 SizedBox(
@@ -140,7 +102,7 @@ class _OverviewState extends State<Overview> {
                   height: 50,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children:  [
+                    children: [
                       const Text(
                         "Characters",
                         style: TextStyle(
@@ -151,80 +113,56 @@ class _OverviewState extends State<Overview> {
                         ),
                       ),
                       InkWell(
-                         onTap: () {
-                            Navigator.pushNamed(context, '/characters', arguments: widget.id);
+                        onTap: () {
+                          Navigator.pushNamed(context, '/characters',
+                              arguments: widget.id);
                         },
-                          child: const Text(
-                            "See all",
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 15,
-                              fontWeight: FontWeight.normal,
-                              fontFamily: 'SF Pro Display',
-                            ),
-                          ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 200,
-                  child: FutureBuilder<CharacterData>(
-                    future: data,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                       if(snapshot.data?.meta?.count==0) {
-
-                        return const Center(
-                          child: Text("No Characters saved at the moment",
+                        child: const Text(
+                          "See all",
                           style: TextStyle(
                             color: Colors.grey,
                             fontSize: 15,
                             fontWeight: FontWeight.normal,
                             fontFamily: 'SF Pro Display',
                           ),
-                          ),
-                        );
-                        }
-
-                       return ListView.builder(
-                         scrollDirection: Axis.horizontal,
-                         itemCount: snapshot.data!.data?.length,
-                         itemBuilder: (context, index) {
-
-                           return CharacterCard(
-                             id: "${snapshot.data!.data![index].id}",
-                             role: "${snapshot.data!.data![index].attributes!.role}", roleCare: true,
-                           );
-                         },
-                       );
-                      }
-                      return Shimmer(
-                        gradient: const LinearGradient(
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                          colors: [
-                            Colors.grey,
-                            Colors.white,
-                            Colors.grey,
-                          ],
                         ),
-                        child: ListView.builder(
-                          itemCount: 5,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              margin: const EdgeInsets.only(right: 10),
-                              height: 200,
-                              width: 100,
-                              decoration: const BoxDecoration(
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 200,
+                  child: BlocBuilder<KitsuAnimeBloc, KitsuAnimeState>(
+                    builder: (context, state) {
+                      switch (state.status) {
+                        case AnimeInformationState.initial:
+                          return charactersShimmer();
+                        case AnimeInformationState.success:
+                          return ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: state.characterSearchResult.data?.length,
+                            itemBuilder: (context, index) {
+
+                              return CharacterCard(
+                                role: "${state.characterSearchResult.data?[index].attributes?.role}",
+                                characterInformation: state.characters?[index],
+                                roleCare: false,
+                              );
+                            },
+                          );
+                        case AnimeInformationState.failure:
+                          return const Center(
+                            child: Text(
+                              "No characters defined at the moment, probably another shonen anime",
+                              style: TextStyle(
                                 color: Colors.grey,
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                                fontSize: 12,
+                                fontWeight: FontWeight.normal,
+                                fontFamily: 'SF Pro Display',
                               ),
-                            );
-                          },
-                        ),
-                      );
+                            ),
+                          );
+                      }
                     },
                   ),
                 )
@@ -233,10 +171,10 @@ class _OverviewState extends State<Overview> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children:  [
-                 const Padding(
-                  padding:  EdgeInsets.only(top: 15, bottom: 15),
-                  child:     Text(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(top: 15, bottom: 15),
+                  child: Text(
                     "Trailer",
                     style: TextStyle(
                       color: Colors.grey,
@@ -263,13 +201,71 @@ class _OverviewState extends State<Overview> {
                           );
                         },
                       ),
-                    )
-                ),
+                    )),
               ],
             )
           ],
         )
       ],
+    );
+  }
+
+  Widget charactersShimmer() {
+    return Shimmer(
+      gradient: const LinearGradient(
+        begin: Alignment.centerLeft,
+        end: Alignment.centerRight,
+        colors: [
+          Colors.grey,
+          Colors.white,
+          Colors.grey,
+        ],
+      ),
+      child: ListView.builder(
+        itemCount: 5,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return Container(
+            margin: const EdgeInsets.only(right: 10),
+            height: 200,
+            width: 100,
+            decoration: const BoxDecoration(
+              color: Colors.grey,
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget categoriesShimmer(){
+    return Shimmer(
+      gradient: const LinearGradient(
+        begin: Alignment.centerLeft,
+        end: Alignment.centerRight,
+        colors: [
+          Colors.grey,
+          Colors.white,
+          Colors.grey,
+        ],
+      ),
+      child: ListView.builder(
+        itemCount: 5,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return Container(
+            margin: const EdgeInsets.only(right: 10),
+            height: 30,
+            width: 100,
+            decoration: const BoxDecoration(
+              color: Colors.grey,
+              borderRadius:
+              BorderRadius.all(Radius.circular(10)),
+            ),
+          );
+        },
+      ),
     );
   }
 }
