@@ -1,4 +1,3 @@
-export 'attributes.dart';
 export 'character.dart';
 export 'character_link.dart';
 export 'character_search_result.dart';

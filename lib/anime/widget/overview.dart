@@ -142,12 +142,7 @@ class _OverviewState extends State<Overview> {
                             scrollDirection: Axis.horizontal,
                             itemCount: state.characterSearchResult.data?.length,
                             itemBuilder: (context, index) {
-
-                              return CharacterCard(
-                                role: "${state.characterSearchResult.data?[index].attributes?.role}",
-                                characterInformation: state.characters?[index],
-                                roleCare: false,
-                              );
+                              return CharacterCard(character: state.characterInformation![index],);
                             },
                           );
                         case AnimeInformationState.failure:

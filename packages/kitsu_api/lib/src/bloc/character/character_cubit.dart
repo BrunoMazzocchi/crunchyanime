@@ -20,7 +20,6 @@ class CharacterCubit extends Cubit<CharacterState> {
         final character = await _characterRepository.getCharacterInformation(id);
         emit(state.copyWith(
           status: CharacterStatus.loaded,
-          characterInformationResult: character,
         ));
       }
     } on Exception {

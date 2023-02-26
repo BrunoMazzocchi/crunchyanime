@@ -2,25 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:kitsu_api/kitsu_api.dart';
 import 'package:shimmer/shimmer.dart';
 
-class CharacterCard extends StatelessWidget {
-  final CharacterInformation? characterInformation;
-  final bool? roleCare;
-  final String role;
+class CharacterCard extends StatefulWidget {
+  final CharacterInformation character;
 
-  const CharacterCard({
-    Key? key,
-    required this.characterInformation,
-    required this.role,
-    required this.roleCare,
-  }) : super(key: key);
+  const CharacterCard({Key? key, required this.character}) : super(key: key);
+
+  @override
+  State<CharacterCard> createState() => _CharacterCardState();
+}
+
+class _CharacterCardState extends State<CharacterCard> {
+  bool roleCare = false;
 
   @override
   Widget build(BuildContext context) {
-    late String imageUrl;
-    bool roleCare = false;
-    if (role != "main" && roleCare == true) {
-      return Container();
-    }
+
     return Container(
       margin: const EdgeInsets.only(right: 10),
       width: 120,
@@ -38,8 +34,9 @@ class CharacterCard extends StatelessWidget {
             height: 150,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage(characterInformation?.attributes?.image?.original ??
-                    "https://via.placeholder.com/150"),
+                image: NetworkImage(
+                   "${widget.character.attributes?.image}" ??
+                        "https://via.placeholder.com/150"),
                 fit: BoxFit.cover,
               ),
               borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -48,9 +45,7 @@ class CharacterCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 5),
             child: Text(
-              characterInformation?.attributes?.names
-                  ?.en ??
-                  "Unknown",
+              "${widget.character.attributes?.name}" ?? "Unknown",
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 12,
@@ -64,7 +59,7 @@ class CharacterCard extends StatelessWidget {
             child: SizedBox(
               height: 10,
               child: Text(
-                role.toUpperCase(),
+                "Main".toUpperCase(),
                 style: const TextStyle(
                   color: Colors.grey,
                   fontSize: 10,

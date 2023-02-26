@@ -14,3 +14,11 @@ class AnimeInformationFetched extends KitsuAnimeEvent {
   @override
   List<Object> get props => [id];
 }
+
+class LoadCharacter extends KitsuAnimeEvent {
+  final String id;
+  const LoadCharacter({required this.id});
+
+  @override
+  List<Object> get props => [id];
+}

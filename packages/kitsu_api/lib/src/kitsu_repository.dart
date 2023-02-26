@@ -37,7 +37,7 @@ class KitsuRepository {
     return await client.fetchCharacters(id);
   }
 
-  Future<CharacterInformationResult> getCharacterInformation(String id) async {
+  Future<CharacterInformation> getCharacterInformation(String id) async {
     return await client.fetchCharacterInformation(id);
   }
 

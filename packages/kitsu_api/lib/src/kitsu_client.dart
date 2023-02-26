@@ -68,13 +68,12 @@ class KitsuClient {
       throw Exception('error fetching anime');
     }
   }
-  Future<CharacterInformationResult> fetchCharacterInformation(String id) async {
+  Future<CharacterInformation> fetchCharacterInformation(String id) async {
     final String baseUrl = 'https://kitsu.io/api/edge/media-characters/$id/character';
     final response = await httpClient.get(Uri.parse(baseUrl));
     if (response.statusCode == 200) {
       final body = json.decode(response.body) as Map<String, dynamic>;
-      print(id);
-      return CharacterInformationResult.fromJson(body);
+      return CharacterInformation.fromJson(body);
     } else {
       throw Exception('error fetching character information');
     }

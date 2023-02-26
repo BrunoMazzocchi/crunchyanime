@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:kitsu_api/src/models/characters/character_search_result.dart';
 
 import '../../../kitsu_api.dart';
 import '../../constants.dart';
@@ -27,14 +26,30 @@ class KitsuAnimeBloc extends Bloc<KitsuAnimeEvent, KitsuAnimeState> {
             await kitsuRepository.getCharacters(event.id ?? "");
         final animeCategory =
             await kitsuRepository.getAnimeCategories(event.id ?? "");
+        final characterInformation = await getCharacterInformation();
         return emit(state.copyWith(
           status: AnimeInformationState.success,
           animeCategory: animeCategory,
           characterSearchResult: characterSearchResult,
+          characterInformation: characterInformation,
         ));
       }
     } catch (_) {
       emit(state.copyWith(status: AnimeInformationState.failure));
     }
   }
+
+
+  Future<List<CharacterInformation>> getCharacterInformation() async {
+
+    List<CharacterInformation> characterInformation = [];
+
+    for (var character in state.characterSearchResult.data!) {
+      final characterInfo = await kitsuRepository.getCharacterInformation("${character.id}");
+      characterInformation.add(characterInfo);
+    }
+
+    return characterInformation;
+  }
+
 }

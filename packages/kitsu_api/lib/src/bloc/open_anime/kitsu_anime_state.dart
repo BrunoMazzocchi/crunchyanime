@@ -8,21 +8,24 @@ class KitsuAnimeState extends Equatable {
     this.characterSearchResult = const CharacterSearchResult(),
     this.animeCategory = const CategorySearchResult(),
     this.status = AnimeInformationState.initial,
+    this.characterInformation = const <CharacterInformation>[]
   });
 
 
   final CharacterSearchResult characterSearchResult;
   final AnimeInformationState status;
   final CategorySearchResult animeCategory;
-
+  final List<CharacterInformation>? characterInformation;
   KitsuAnimeState copyWith({
     CharacterSearchResult? characterSearchResult,
     AnimeInformationState? status,
     CategorySearchResult? animeCategory,
+    List<CharacterInformation>? characterInformation,
   }) => KitsuAnimeState(
     characterSearchResult: characterSearchResult ?? this.characterSearchResult,
     status: status ?? this.status,
     animeCategory: animeCategory ?? this.animeCategory,
+    characterInformation: characterInformation ?? this.characterInformation,
   );
 
   @override
