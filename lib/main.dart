@@ -77,7 +77,7 @@ class App extends StatelessWidget {
             create: (_) => KitsuAnimeBloc(kitsuRepository: kitsuRepository),
           ),
           Provider<CharacterCubit>(
-            create: (_) => CharacterCubit(kitsuRepository),
+            create: (_) => CharacterCubit(),
           ),
         ],
         child: MaterialApp(

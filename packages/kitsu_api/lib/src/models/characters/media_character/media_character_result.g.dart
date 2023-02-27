@@ -2,30 +2,33 @@
 
 // ignore_for_file: implicit_dynamic_parameter
 
-part of 'character_information.dart';
+part of 'media_character_result.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-CharacterInformation _$CharacterInformationFromJson(
+MediaCharacterResult _$MediaCharacterResultFromJson(
         Map<String, dynamic> json) =>
     $checkedCreate(
-      'CharacterInformation',
+      'MediaCharacterResult',
       json,
       ($checkedConvert) {
-        final val = CharacterInformation(
-          id: $checkedConvert('id', (v) => v as String?),
-          type: $checkedConvert('type', (v) => v as String?),
+        final val = MediaCharacterResult(
           links: $checkedConvert(
               'links',
               (v) =>
                   v == null ? null : Links.fromJson(v as Map<String, dynamic>)),
-          attributes: $checkedConvert(
-              'attributes',
-              (v) => v == null
-                  ? null
-                  : Attributes.fromJson(v as Map<String, dynamic>)),
+          meta: $checkedConvert(
+              'meta',
+              (v) =>
+                  v == null ? null : Meta.fromJson(v as Map<String, dynamic>)),
+          data: $checkedConvert(
+              'data',
+              (v) => (v as List<dynamic>?)
+                  ?.map(
+                      (e) => MediaCharacter.fromJson(e as Map<String, dynamic>))
+                  .toList()),
         );
         return val;
       },

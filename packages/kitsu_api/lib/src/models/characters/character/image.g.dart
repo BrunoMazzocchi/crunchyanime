@@ -13,10 +13,11 @@ Image _$ImageFromJson(Map<String, dynamic> json) => $checkedCreate(
       json,
       ($checkedConvert) {
         final val = Image(
-          tiny: $checkedConvert('tiny', (v) => v as String?),
-          large: $checkedConvert('large', (v) => v as String?),
-          small: $checkedConvert('small', (v) => v as String?),
           original: $checkedConvert('original', (v) => v as String?),
+          large: $checkedConvert('large', (v) => v as String?),
+          medium: $checkedConvert('medium', (v) => v as String?),
+          small: $checkedConvert('small', (v) => v as String?),
+          tiny: $checkedConvert('tiny', (v) => v as String?),
           meta: $checkedConvert(
               'meta',
               (v) =>

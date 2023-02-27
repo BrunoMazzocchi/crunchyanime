@@ -1,13 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:ffi';
-
 import 'package:http/http.dart' as http;
 import 'package:kitsu_api/kitsu_api.dart';
-import 'package:kitsu_api/src/models/characters/character_search_result.dart';
-
-import 'models/anime/models.dart';
-import 'models/character_information/models.dart';
 
 class KitsuClient {
   KitsuClient({
@@ -58,27 +52,6 @@ class KitsuClient {
     }
   }
 
-  Future<CharacterSearchResult> fetchCharacters(String id) async {
-    final String baseUrl = 'https://kitsu.io/api/edge/anime/$id/characters';
-    final response = await httpClient.get(Uri.parse(baseUrl));
-    if (response.statusCode == 200) {
-      final body = json.decode(response.body) as Map<String, dynamic>;
-      return CharacterSearchResult.fromJson(body);
-    } else {
-      throw Exception('error fetching anime');
-    }
-  }
-  Future<CharacterInformation> fetchCharacterInformation(String id) async {
-    final String baseUrl = 'https://kitsu.io/api/edge/media-characters/$id/character';
-    final response = await httpClient.get(Uri.parse(baseUrl));
-    if (response.statusCode == 200) {
-      final body = json.decode(response.body) as Map<String, dynamic>;
-      return CharacterInformation.fromJson(body);
-    } else {
-      throw Exception('error fetching character information');
-    }
-  }
-
 
   Future<CategorySearchResult> fetchAnimeCategories(String id) async {
     final String baseUrl = 'https://kitsu.io/api/edge/anime/$id/categories';
@@ -86,6 +59,29 @@ class KitsuClient {
     if (response.statusCode == 200) {
       final body = json.decode(response.body) as Map<String, dynamic>;
       return CategorySearchResult.fromJson(body);
+    } else {
+      throw Exception('error fetching anime');
+    }
+  }
+
+
+  Future<MediaCharacterResult> fetchMediaCharacterResult(String anime, [int offset = 0]) async {
+    final String baseUrl = "https://kitsu.io/api/edge/anime/${anime}/characters?page%5Blimit%5D=20&page%5Boffset%5D=$offset";
+    final response = await httpClient.get(Uri.parse(baseUrl));
+    if (response.statusCode == 200) {
+      final body = json.decode(response.body) as Map<String, dynamic>;
+      return MediaCharacterResult.fromJson(body);
+    } else {
+      throw Exception('error fetching anime');
+    }
+  }
+
+  Future<Character> fetchCharacter(String id) async {
+    final String baseUrl = "https://kitsu.io/api/edge/media-characters/$id/character";
+    final response = await httpClient.get(Uri.parse(baseUrl));
+    if (response.statusCode == 200) {
+      final body = json.decode(response.body) as Map<String, dynamic>;
+      return Character.fromJson(body['data']);
     } else {
       throw Exception('error fetching anime');
     }

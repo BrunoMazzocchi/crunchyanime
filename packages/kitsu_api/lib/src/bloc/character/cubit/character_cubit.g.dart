@@ -14,25 +14,24 @@ CharacterState _$CharacterStateFromJson(Map<String, dynamic> json) =>
       json,
       ($checkedConvert) {
         final val = CharacterState(
+          character: $checkedConvert(
+              'character',
+              (v) => v == null
+                  ? const Character()
+                  : Character.fromJson(v as Map<String, dynamic>)),
           status: $checkedConvert(
               'status',
               (v) =>
-                  $enumDecodeNullable(_$CharacterStatusEnumMap, v) ??
-                  CharacterStatus.initial),
-          characterInformationResult: $checkedConvert(
-              'characterInformationResult',
-              (v) => v == null
-                  ? null
-                  : CharacterInformationResult.fromJson(
-                      v as Map<String, dynamic>)),
+                  $enumDecodeNullable(_$CharacterstatusEnumMap, v) ??
+                  Characterstatus.initial),
         );
         return val;
       },
     );
 
-const _$CharacterStatusEnumMap = {
-  CharacterStatus.initial: 'initial',
-  CharacterStatus.loading: 'loading',
-  CharacterStatus.loaded: 'loaded',
-  CharacterStatus.error: 'error',
+const _$CharacterstatusEnumMap = {
+  Characterstatus.initial: 'initial',
+  Characterstatus.loading: 'loading',
+  Characterstatus.success: 'success',
+  Characterstatus.failure: 'failure',
 };

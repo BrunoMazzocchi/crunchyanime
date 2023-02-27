@@ -5,30 +5,32 @@ enum AnimeInformationState { initial, success, failure}
 class KitsuAnimeState extends Equatable {
 
   const KitsuAnimeState({
-    this.characterSearchResult = const CharacterSearchResult(),
     this.animeCategory = const CategorySearchResult(),
     this.status = AnimeInformationState.initial,
-    this.characterInformation = const <CharacterInformation>[]
+    this.mediaCharacterResult = const MediaCharacterResult(),
+    this.character = const Character(),
+
   });
 
 
-  final CharacterSearchResult characterSearchResult;
   final AnimeInformationState status;
   final CategorySearchResult animeCategory;
-  final List<CharacterInformation>? characterInformation;
+  final MediaCharacterResult mediaCharacterResult; 
+  final Character character;
+
   KitsuAnimeState copyWith({
-    CharacterSearchResult? characterSearchResult,
     AnimeInformationState? status,
     CategorySearchResult? animeCategory,
-    List<CharacterInformation>? characterInformation,
+    MediaCharacterResult? mediaCharacterResult,
+    Character? character,
   }) => KitsuAnimeState(
-    characterSearchResult: characterSearchResult ?? this.characterSearchResult,
     status: status ?? this.status,
     animeCategory: animeCategory ?? this.animeCategory,
-    characterInformation: characterInformation ?? this.characterInformation,
+    mediaCharacterResult: mediaCharacterResult ?? this.mediaCharacterResult,
+    character: character ?? this.character,
   );
 
   @override
-  List<Object> get props => [characterSearchResult, animeCategory,  status];
+  List<Object> get props => [animeCategory, character,  status];
 
 }
