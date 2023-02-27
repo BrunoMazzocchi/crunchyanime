@@ -1,11 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-
 import '../../../kitsu_api.dart';
 import '../../constants.dart';
-
 part 'kitsu_anime_event.dart';
-
 part 'kitsu_anime_state.dart';
 
 class KitsuAnimeBloc extends Bloc<KitsuAnimeEvent, KitsuAnimeState> {
@@ -14,6 +11,8 @@ class KitsuAnimeBloc extends Bloc<KitsuAnimeEvent, KitsuAnimeState> {
   }) : super(const KitsuAnimeState()) {
     on<AnimeInformationFetched>(_onAnimeOpen,
         transformer: throttleDroppable(throttleDuration));
+    on<ResetAnimeInformation>(_onResetAnimeInformation);
+
   }
 
   final KitsuRepository kitsuRepository;
@@ -22,16 +21,14 @@ class KitsuAnimeBloc extends Bloc<KitsuAnimeEvent, KitsuAnimeState> {
       AnimeInformationFetched event, Emitter<KitsuAnimeState> emit) async {
     try {
       if (state.status == AnimeInformationState.initial) {
-        final characterSearchResult =
-            await kitsuRepository.getCharacters(event.id ?? "");
         final animeCategory =
-            await kitsuRepository.getAnimeCategories(event.id ?? "");
-        final characterInformation = await getCharacterInformation();
+            await kitsuRepository.getAnimeCategories(event.id);
+        final mediaCharacterResult = 
+            await kitsuRepository.getMediaCharacterResult(event.id);
         return emit(state.copyWith(
           status: AnimeInformationState.success,
           animeCategory: animeCategory,
-          characterSearchResult: characterSearchResult,
-          characterInformation: characterInformation,
+          mediaCharacterResult: mediaCharacterResult,
         ));
       }
     } catch (_) {
@@ -39,17 +36,11 @@ class KitsuAnimeBloc extends Bloc<KitsuAnimeEvent, KitsuAnimeState> {
     }
   }
 
+  Future<void> _onResetAnimeInformation(
+      ResetAnimeInformation event, Emitter<KitsuAnimeState> emit) async {
+      emit(state.copyWith(status: AnimeInformationState.initial));
 
-  Future<List<CharacterInformation>> getCharacterInformation() async {
-
-    List<CharacterInformation> characterInformation = [];
-
-    for (var character in state.characterSearchResult.data!) {
-      final characterInfo = await kitsuRepository.getCharacterInformation("${character.id}");
-      characterInformation.add(characterInfo);
-    }
-
-    return characterInformation;
   }
+
 
 }

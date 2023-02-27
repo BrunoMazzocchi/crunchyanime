@@ -1,5 +1,4 @@
 import 'package:kitsu_api/kitsu_api.dart';
-import 'package:kitsu_api/src/models/characters/character_search_result.dart';
 
 
 class KitsuRepository {
@@ -32,13 +31,12 @@ class KitsuRepository {
     return client.fetchAnimeCategories(id);
   }
 
-  Future<CharacterSearchResult> getCharacters(String id) async {
-
-    return await client.fetchCharacters(id);
+  Future<MediaCharacterResult> getMediaCharacterResult(String anime, [int offset =0]) {
+    return client.fetchMediaCharacterResult(anime, offset);
   }
 
-  Future<CharacterInformation> getCharacterInformation(String id) async {
-    return await client.fetchCharacterInformation(id);
+  Future<Character> getCharacter(String id) {
+    return client.fetchCharacter(id);
   }
 
 }

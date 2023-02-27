@@ -15,10 +15,5 @@ class AnimeInformationFetched extends KitsuAnimeEvent {
   List<Object> get props => [id];
 }
 
-class LoadCharacter extends KitsuAnimeEvent {
-  final String id;
-  const LoadCharacter({required this.id});
 
-  @override
-  List<Object> get props => [id];
-}
+class ResetAnimeInformation extends KitsuAnimeEvent {}

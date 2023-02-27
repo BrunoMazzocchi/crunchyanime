@@ -62,7 +62,7 @@ class _StaffCardState extends State<StaffCard> {
                     image: DecorationImage(
                       image: NetworkImage(
                           imageUrl
-                              ),
+                      ),
                       fit: BoxFit.cover,
                     ),
                     borderRadius: const BorderRadius.all(Radius.circular(10)),

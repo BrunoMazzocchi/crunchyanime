@@ -22,7 +22,7 @@ Relationships _$RelationshipsFromJson(Map<String, dynamic> json) =>
               'character',
               (v) => v == null
                   ? null
-                  : CharacterLinks.fromJson(v as Map<String, dynamic>)),
+                  : Character.fromJson(v as Map<String, dynamic>)),
           voices: $checkedConvert(
               'voices',
               (v) => v == null

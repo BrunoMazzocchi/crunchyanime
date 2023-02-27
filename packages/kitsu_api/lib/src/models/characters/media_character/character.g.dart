@@ -2,18 +2,17 @@
 
 // ignore_for_file: implicit_dynamic_parameter
 
-part of 'character_link.dart';
+part of 'character.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-CharacterLinks _$CharacterLinksFromJson(Map<String, dynamic> json) =>
-    $checkedCreate(
-      'CharacterLinks',
+Character _$CharacterFromJson(Map<String, dynamic> json) => $checkedCreate(
+      'Character',
       json,
       ($checkedConvert) {
-        final val = CharacterLinks(
+        final val = Character(
           links: $checkedConvert(
               'links',
               (v) =>
